@@ -1,0 +1,16 @@
+.colorfull {
+  background: -webkit-linear-gradient(
+    45deg,
+    #d93ea5 18.93%,
+    #f37653 38.38%,
+    #fbbc05 71.6%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.size {
+  font-size: 4rem;
+  height: auto;
+}

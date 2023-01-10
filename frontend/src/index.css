@@ -1,13 +1,18 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: 'OmnesLatinBold';
+  src: url('../public/fonts/OmnesLatin-Bold.woff2');
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'OmnesLatinSemiBold';
+  src: url('../public/fonts/OmnesLatin-SemiBold.woff2');
+  font-weight: 800;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input:focus-visible {
+  outline: none;
+  border: none;
 }
