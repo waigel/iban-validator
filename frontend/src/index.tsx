@@ -9,11 +9,18 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const tolgee = Tolgee().use(DevTools()).use(FormatSimple()).init({
-  language: 'de-DE',
-  apiUrl: process.env.REACT_APP_TOLGEE_API_URL,
-  apiKey: process.env.REACT_APP_TOLGEE_API_KEY,
-});
+const tolgee = Tolgee()
+  .use(DevTools())
+  .use(FormatSimple())
+  .init({
+    language: 'de-DE',
+    staticData: {
+      'de-DE': () => import('./i18n/de-DE.json'),
+    },
+    defaultLanguage: 'de-DE',
+    apiUrl: process.env.REACT_APP_TOLGEE_API_URL,
+    apiKey: process.env.REACT_APP_TOLGEE_API_KEY,
+  });
 
 root.render(
   <React.StrictMode>

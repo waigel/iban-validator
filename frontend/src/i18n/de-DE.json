@@ -1,0 +1,18 @@
+{
+  "APP_DESCRIPTION" : "Geben eine IBAN ein, um zu überprüfen, ob diese gültig ist und um zu erfahren, bei welcher Bank das dazugehörige Konto liegt.",
+  "APP_TITLE" : "IBAN Validierung",
+  "CHECK_DIGITS_MISMATCH" : "Die Prüfziffer stimmt nicht mit dieser IBAN überein. Prüfen Sie die Eingabe.",
+  "CHECK_DIGITS_NOT_NUMERIC" : "Die Prüfziffer ist fehlerhaft. Prüfen Sie die Eingabe.",
+  "COPYRIGHT_NOTICE" : "⚡ Build by Johannes Waigel for Lexoffice",
+  "COUNTRY_CODE_INVALID" : "Die Länderabkürzung ist nicht gültig.",
+  "FOOTER_LABEL_API_DOCU" : "API Docu",
+  "IBAN_CONTAINS_SPECIAL_CHARS" : "Die eingegebene IBAN enthält nicht zulässige Zeichen.",
+  "IBAN_INPUT_IS_EMPTY" : "Bitte gebe eine IBAN ein.",
+  "IBAN_LENGTH_TOO_LONG" : "Die eingegebene IBAN ist zu lang. ",
+  "IBAN_LENGTH_TOO_SHORT" : "Die eingegebene IBAN ist zu kurz.",
+  "LABEL_IBAN_PLACEHOLDER" : "IBAN",
+  "LABEL_VALIDATION_BUTTON" : "Validieren",
+  "MESSAGE_VALID_BANK" : "Bank: ",
+  "MESSAGE_VALID_NOTICE" : "IBAN ist gültig",
+  "TEST_IBAN_TITLE" : "Test IBAN`s"
+}

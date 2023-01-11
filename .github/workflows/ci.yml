@@ -1,0 +1,98 @@
+name: Build
+
+on:
+  push:
+    branches: [main, release]
+  pull_request:
+
+jobs:
+  frontend-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add SHORT_SHA env property with commit short sha
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
+      - name: Configure tolgee download api key
+        run: echo "TOLGEE_DOWNLOAD_API_KEY=${{ secrets.TOLGEE_DOWNLOAD_API_KEY }}" >> $GITHUB_ENV
+      - name: Configure react app api endpoint
+        run: echo "REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+      - name: Docker Login
+        uses: docker/login-action@v2.0.0
+        with:
+          registry: waigel.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build Docker image
+        run: docker build ./frontend -f frontend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-frontend-:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA} --build-arg=TOLGEE_DOWNLOAD_API_KEY=${TOLGEE_DOWNLOAD_API_KEY} --build-arg=REACT_APP_API_ENDPOINT=${REACT_APP_API_ENDPOINT}
+      - name: Push Docker image
+        run: docker push waigel.azurecr.io/lexoffice/iban-validator-frontend:${SHORT_SHA}
+  backend-build:
+    name: Build backend 🏗️
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Build backend
+        run: ./gradlew bootJar
+
+      - name: Tar build
+        run: tar -czf ~/backend.tgz ./build
+
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: backend
+          path: |
+            ~/backend.tgz
+  backend-docker:
+    name: Backend docker 🐬
+    needs: [backend-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add SHORT_SHA env property with commit short sha
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+
+      - name: Download backend build result
+        uses: actions/download-artifact@v2
+        with:
+          name: backend
+          path: ~/
+
+      - name: Untar it
+        run: |
+          tar -xzf ~/backend.tgz ./build
+      - name: Docker Login
+        uses: docker/login-action@v2.0.0
+        with:
+          registry: waigel.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build Docker image
+        run: docker build . -f backend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-api:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA}
+      - name: Push Docker image
+        run: docker push waigel.azurecr.io/lexoffice/iban-validator-api:${SHORT_SHA}
+  cleanup:
+    name: Cleanup 🧹
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [backend-docker, backend-build]
+    steps:
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: backend

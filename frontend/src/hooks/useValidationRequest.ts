@@ -24,7 +24,7 @@ export const useValidationRequest = () => {
       })
       .catch((error: AxiosError) => {
         const errorResponse = error.response?.data as ErrorResponse;
-        return errorResponse.code ?? error.code;
+        return errorResponse?.code ?? error?.code;
       })
       .finally(() => setPending(false));
 
