@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id "io.freefair.lombok" version "6.6.1"
+}
+
+group = 'com.waigel'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+
+
+    // XML Utils (Swagger)
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

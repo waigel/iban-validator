@@ -1,0 +1,47 @@
+[
+  {
+    "value": "DE02120300000000202051",
+    "bankName": "DEUTSCHE KREDITBANK BERLIN",
+    "isValid": true
+  },
+  {
+    "value": "DE02500105170137075030",
+    "bankName": "ING-DIBA",
+    "isValid": true
+  },
+  {
+    "value": "DE02100500000054540402",
+    "bankName": "LANDESBANK BERLIN",
+    "isValid": true
+  },
+  {
+    "value": "DE02300209000106531065",
+    "bankName": "TARGOBANK",
+    "isValid": true
+  },
+  {
+    "value": "DE02200505501015871393",
+    "bankName": "HAMBURGER SPARKASSE",
+    "isValid": true
+  },
+  {
+    "value": "XX02120300000000202051",
+    "bankName": "Invalid country code",
+    "isValid": false
+  },
+  {
+    "value": "DEL2120300000000202051",
+    "bankName": "Check digit wrong",
+    "isValid": false
+  },
+  {
+    "value": "DE021203000",
+    "bankName": "Too short",
+    "isValid": false
+  },
+  {
+    "value": "DE02120300000000202051354444444444444444",
+    "bankName": "Too long",
+    "isValid": false
+  }
+]

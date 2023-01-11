@@ -6,6 +6,11 @@ module.exports = {
       backgroundImage: {
         hero: "url('../public/images/bg.png')",
       },
+      colors: {
+        card: '#212121',
+        card2: '#2a2a2aCC',
+        success: '#79903A',
+      },
       fontFamily: {
         omesbold: ['OmnesLatinBold'],
         omessemibold: ['OmnesLatinSemiBold'],

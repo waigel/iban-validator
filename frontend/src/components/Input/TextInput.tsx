@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {classNames} from '../../utils/classNames';
 
 export interface TextInputProps
@@ -11,6 +11,10 @@ export interface TextInputProps
 export const TextInput = (props: TextInputProps) => {
   const {onValueChange, defaultValue, onEnterPress} = props;
   const [value, setValue] = useState(defaultValue);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   return (
     <input

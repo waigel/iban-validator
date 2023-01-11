@@ -1,15 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
+import {Tolgee, DevTools, TolgeeProvider, FormatSimple} from '@tolgee/react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const tolgee = Tolgee().use(DevTools()).use(FormatSimple()).init({
+  language: 'de-DE',
+  apiUrl: process.env.REACT_APP_TOLGEE_API_URL,
+  apiKey: process.env.REACT_APP_TOLGEE_API_KEY,
+});
+
 root.render(
   <React.StrictMode>
-    <App />
+    <TolgeeProvider
+      tolgee={tolgee}
+      fallback="Loading..." // loading fallback
+    >
+      <App />
+    </TolgeeProvider>
   </React.StrictMode>
 );
 
