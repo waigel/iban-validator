@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build Docker image
-        run: docker build ./frontend -f frontend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-frontend-:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA} --build-arg=TOLGEE_DOWNLOAD_API_KEY=${TOLGEE_DOWNLOAD_API_KEY} --build-arg=REACT_APP_API_ENDPOINT=${REACT_APP_API_ENDPOINT}
+        run: docker build ./frontend -f frontend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-frontend:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA} --build-arg=TOLGEE_DOWNLOAD_API_KEY=${TOLGEE_DOWNLOAD_API_KEY} --build-arg=REACT_APP_API_ENDPOINT=${REACT_APP_API_ENDPOINT}
       - name: Push Docker image
         run: docker push waigel.azurecr.io/lexoffice/iban-validator-frontend:${SHORT_SHA}
   backend-build:
@@ -91,7 +91,7 @@ jobs:
     name: Cleanup 🧹
     runs-on: ubuntu-latest
     if: always()
-    needs: [backend-docker, backend-build]
+    needs: [backend-docker, backend-build, frontend-docker]
     steps:
       - uses: geekyeggo/delete-artifact@v1
         with:
