@@ -50,6 +50,9 @@ jobs:
       - name: Build backend
         run: ./gradlew bootJar
 
+      - name: Test backend
+        run: ./gradlew test
+
       - name: Tar build
         run: tar -czf ~/backend.tgz ./build
 
@@ -87,11 +90,25 @@ jobs:
         run: docker build . -f backend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-api:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA}
       - name: Push Docker image
         run: docker push waigel.azurecr.io/lexoffice/iban-validator-api:${SHORT_SHA}
+  deployment:
+    name: Deployment 🚀
+    runs-on: ubuntu-latest
+    needs: [backend-docker, frontend-build]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: imranismail/setup-kustomize@v2
+      - name: Build kustomize deployment config
+        run: ./k8s/k8s-apply.sh
+      - uses: actions-hub/kubectl@1.26.0
+        env:
+          KUBE_CONFIG: ${{ secrets.K8S_CONFIG }}
+        with:
+          args: apply -f k8s/prod.yml
   cleanup:
     name: Cleanup 🧹
     runs-on: ubuntu-latest
     if: always()
-    needs: [backend-docker, backend-build, frontend-build]
+    needs: [deployment]
     steps:
       - uses: geekyeggo/delete-artifact@v2.0.0
         with:
