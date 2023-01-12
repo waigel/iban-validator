@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Add SHORT_SHA env property with commit short sha
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
-      - name: Configure tolgee download api key
-        run: echo "TOLGEE_DOWNLOAD_API_KEY=${{ secrets.TOLGEE_DOWNLOAD_API_KEY }}" >> $GITHUB_ENV
       - name: Configure react app api endpoint
         run: echo "REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}" >> $GITHUB_ENV
       - uses: actions/checkout@v3
@@ -24,7 +22,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build Docker image
-        run: docker build ./frontend -f frontend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-frontend:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA} --build-arg=TOLGEE_DOWNLOAD_API_KEY=${TOLGEE_DOWNLOAD_API_KEY} --build-arg=REACT_APP_API_ENDPOINT=${REACT_APP_API_ENDPOINT}
+        run: docker build ./frontend -f frontend.Dockerfile --tag waigel.azurecr.io/lexoffice/iban-validator-frontend:${SHORT_SHA} --build-arg=GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg=GIT_COMMIT=${SHORT_SHA} --build-arg=TOLGEE_DOWNLOAD_API_KEY=${{ secrets.TOLGEE_DOWNLOAD_API_KEY }} --build-arg=REACT_APP_API_ENDPOINT=${REACT_APP_API_ENDPOINT}
       - name: Push Docker image
         run: docker push waigel.azurecr.io/lexoffice/iban-validator-frontend:${SHORT_SHA}
   backend-build:

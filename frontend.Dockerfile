@@ -31,7 +31,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . ./
 
 # Install i18n from tolgee
-RUN ./scripts/i18n.sh
+RUN TOLGEE_DOWNLOAD_API_KEY=${TOLGEE_DOWNLOAD_API_KEY} ./scripts/i18n.sh
 RUN ls src/i18n/
 RUN npm run build
 
