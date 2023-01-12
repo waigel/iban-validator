@@ -1,9 +1,10 @@
 package com.waigel.backend.controller;
 
-import com.waigel.backend.dtos.ValidationRequestDTO;
-import com.waigel.backend.iban.CountryCodeInvalidException;
+import com.waigel.backend.models.dtos.IBANValidationResponseDTO;
+import com.waigel.backend.models.dtos.ValidationRequestDTO;
+import com.waigel.backend.exceptions.CountryCodeInvalidException;
 import com.waigel.backend.iban.IBAN;
-import com.waigel.backend.iban.IBANParseException;
+import com.waigel.backend.exceptions.IBANParseException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -24,10 +25,10 @@ public class ValidatorController {
     @PostMapping("/validate")
     @Operation(summary = "Validate your IBAN")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Object> handleValidation(@RequestBody final ValidationRequestDTO validationRequestDTO) throws IBANParseException, CountryCodeInvalidException {
+    public ResponseEntity<IBANValidationResponseDTO> handleValidation(@RequestBody final ValidationRequestDTO validationRequestDTO) throws IBANParseException, CountryCodeInvalidException {
         logger.info("Handling validation request for IBAN: {}", validationRequestDTO.getIban());
-        final IBAN iban = new IBAN(validationRequestDTO.getIban());
-        return ResponseEntity.ok().build();
+        final var iban = new IBAN(validationRequestDTO.getIban(), validationRequestDTO.getLocale());
+        return ResponseEntity.ok(iban.getValidationResponse());
     }
 
 }

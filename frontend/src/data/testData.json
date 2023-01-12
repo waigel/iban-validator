@@ -10,8 +10,8 @@
     "isValid": true
   },
   {
-    "value": "DE02100500000054540402",
-    "bankName": "LANDESBANK BERLIN",
+    "value": "DE02700100800030876808",
+    "bankName": "Postbank",
     "isValid": true
   },
   {
@@ -20,9 +20,14 @@
     "isValid": true
   },
   {
-    "value": "DE02200505501015871393",
-    "bankName": "HAMBURGER SPARKASSE",
+    "bankName": "NOT SEPA COUNTRY",
+    "value": "ST68 0001 0001 0051 8453 1011 2",
     "isValid": true
+  },
+  {
+    "value": "US64SVBKUS6S3300958879",
+    "bankName": "Bank of USA",
+    "isValid": false
   },
   {
     "value": "XX02120300000000202051",

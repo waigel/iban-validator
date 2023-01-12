@@ -1,7 +1,5 @@
 package com.waigel.backend.exceptions;
 
-import com.waigel.backend.iban.CountryCodeInvalidException;
-import com.waigel.backend.iban.IBANParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +21,12 @@ public class ExceptionHandlers {
     public ResponseEntity<ErrorResponseBody> handleCountryCodeInvalidException(final CountryCodeInvalidException ex) {
         logger.error("CountryCodeInvalidException: {}", ex.getMessage());
         return new ResponseEntity<>(new ErrorResponseBody(ex.getCode(), null), ex.getHttpStatus());
+    }
+
+    @ExceptionHandler(IBANRegistryException.class)
+    public ResponseEntity<ErrorResponseBody> handleIBANRegistryException(final IBANRegistryException ex) {
+        logger.error("IBANRegistryException: {}", ex.getMessage());
+        return new ResponseEntity<>(new ErrorResponseBody(ex.getCode(), ex.getParams()), ex.getHttpStatus());
     }
 
     @ExceptionHandler(ErrorException.class)

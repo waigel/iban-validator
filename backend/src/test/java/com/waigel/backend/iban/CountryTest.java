@@ -1,5 +1,6 @@
 package com.waigel.backend.iban;
 
+import com.waigel.backend.exceptions.CountryCodeInvalidException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CountryCodeTest {
+public class CountryTest {
 
     private static final HashMap<String, Integer> testData = new HashMap<>();
 
@@ -30,7 +31,7 @@ public class CountryCodeTest {
     @Test()
     @DisplayName("Country code 'DE' should be convert correctly")
     public void convertCountryCodeDECorrectly() throws CountryCodeInvalidException {
-        final var cc = new CountryCode("DE");
+        final var cc = new Country("DE", null);
         assertEquals(1314, cc.getAsAlpha2());
     }
 
@@ -38,7 +39,7 @@ public class CountryCodeTest {
     @DisplayName("Test should convert all country codes correctly")
     public void convertAllCountryCodesCorrectly() throws CountryCodeInvalidException {
         for (final var entry : testData.entrySet()) {
-            assertEquals(entry.getValue(), new CountryCode(entry.getKey()).getAsAlpha2());
+            assertEquals(entry.getValue(), new Country(entry.getKey(), null).getAsAlpha2());
         }
     }
 }

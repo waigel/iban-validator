@@ -12,7 +12,9 @@ public enum Message {
     COUNTRY_CODE_INVALID("Country code is invalid"),
     IBAN_CONTAINS_SPECIAL_CHARS("IBAN contains special chars. Allowed AZ09"),
     CHECK_DIGITS_MISMATCH("Check digits mismatch"),
-    IBAN_INPUT_IS_EMPTY("IBAN input is empty");
+    IBAN_INPUT_IS_EMPTY("IBAN input is empty"),
+    IBAN_COUNTRY_NOT_IN_REGISTRY("IBAN country not in registry"),
+    IBAN_REGISTRY_LENGTH_MISMATCH("IBAN registry length mismatch");
 
     private final String message;
 
@@ -27,4 +29,4 @@ public enum Message {
     public String getCode() {
         return name().toUpperCase(Locale.ENGLISH);
     }
-}
+    }

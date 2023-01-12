@@ -1,4 +1,4 @@
-package com.waigel.backend.iban;
+package com.waigel.backend.exceptions;
 
 import com.waigel.backend.exceptions.ErrorException;
 import com.waigel.backend.exceptions.Message;
