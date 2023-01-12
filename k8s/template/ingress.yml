@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: $APP_NAME
+  namespace: $NAMESPACE
+  labels:
+    app: $APP_NAME
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ~* "^/actuator" {
+          deny all;
+          return 403;
+        }
+spec:
+  tls:
+    - hosts:
+        - $DOMAIN
+      secretName: $APP_NAME-tls
+  rules:
+    - host: $DOMAIN
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: $APP_NAME-api
+                port:
+                  name: http
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: $APP_NAME-frontend
+                port:
+                  name: http
