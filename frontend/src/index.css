@@ -16,3 +16,7 @@ input:focus-visible {
   outline: none;
   border: none;
 }
+select:focus-visible {
+  outline: none;
+  border: none;
+}

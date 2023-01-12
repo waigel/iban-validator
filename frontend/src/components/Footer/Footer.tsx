@@ -1,5 +1,6 @@
 import {useTranslate} from '@tolgee/react';
 import React from 'react';
+import {LocalizationSelector} from '../LocalizationSelector/LocalizationSelector';
 
 export const Footer = () => {
   const {t} = useTranslate();
@@ -11,6 +12,7 @@ export const Footer = () => {
           <a href={`${process.env.REACT_APP_API_ENDPOINT}`} target="_blank">
             {t('FOOTER_LABEL_API_DOCU')}
           </a>
+          <LocalizationSelector />
         </div>
       </div>
     </footer>

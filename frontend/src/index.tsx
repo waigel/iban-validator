@@ -13,11 +13,13 @@ const tolgee = Tolgee()
   .use(DevTools())
   .use(FormatSimple())
   .init({
-    language: 'de-DE',
+    defaultLanguage: 'de-DE',
+    fallbackLanguage: 'de-DE',
+    availableLanguages: ['de-DE', 'en-US'],
     staticData: {
       'de-DE': () => import('./i18n/de-DE.json'),
+      'en-US': () => import('./i18n/en-US.json'),
     },
-    defaultLanguage: 'de-DE',
     apiUrl: process.env.REACT_APP_TOLGEE_API_URL,
     apiKey: process.env.REACT_APP_TOLGEE_API_KEY,
   });

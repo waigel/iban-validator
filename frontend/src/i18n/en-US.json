@@ -1,0 +1,22 @@
+{
+  "APP_DESCRIPTION" : "Enter an IBAN to verify that it is valid and to find out at which bank the associated account is located.",
+  "APP_TITLE" : "IBAN validation",
+  "CHECK_DIGITS_MISMATCH" : "The check digit does not match this IBAN. Check the entry.",
+  "CHECK_DIGITS_NOT_NUMERIC" : "The check digit is incorrect. Check the entry.",
+  "COPYRIGHT_NOTICE" : "⚡ Build by Johannes Waigel for Lexoffice",
+  "COUNTRY_CODE_INVALID" : "The country abbreviation is not valid.",
+  "de-DE" : "German (Germany)",
+  "en-US" : "English (United States)",
+  "ERR_BAD_REQUEST" : "A problem has occurred with the request.",
+  "ERR_NETWORK" : "The API is currently unavailable. Try again later.",
+  "FOOTER_LABEL_API_DOCU" : "API Docu",
+  "IBAN_CONTAINS_SPECIAL_CHARS" : "The entered IBAN contains invalid characters.",
+  "IBAN_INPUT_IS_EMPTY" : "Please enter an IBAN.",
+  "IBAN_LENGTH_TOO_LONG" : "The IBAN entered is too long.",
+  "IBAN_LENGTH_TOO_SHORT" : "The IBAN entered is too short.",
+  "LABEL_IBAN_PLACEHOLDER" : "IBAN",
+  "LABEL_VALIDATION_BUTTON" : "Validate",
+  "MESSAGE_VALID_BANK" : "Bank:",
+  "MESSAGE_VALID_NOTICE" : "IBAN is valid",
+  "TEST_IBAN_TITLE" : "Test IBAN`s"
+}
