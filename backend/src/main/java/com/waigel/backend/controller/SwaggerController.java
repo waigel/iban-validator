@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SwaggerController {
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public void swaggerOnRootLevel(final HttpServletResponse httpServletResponse, final HttpServletRequest request) {
-        httpServletResponse.setHeader("Location", request.getServletPath() + "/swagger-ui/index.html");
+        httpServletResponse.setHeader("Location", String.format("%s/swagger-ui/index.html", request.getContextPath()));
         httpServletResponse.setStatus(302);
     }
 }

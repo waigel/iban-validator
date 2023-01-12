@@ -12,7 +12,7 @@ export const useValidationRequest = () => {
     setPending(true);
     const response = await axios
       .post<ErrorResponse>(
-        `${process.env.REACT_APP_API_ENDPOINT}/api/iban/validate`,
+        `${process.env.REACT_APP_API_ENDPOINT}/iban/validate`,
         {iban}
       )
       .then(response => {

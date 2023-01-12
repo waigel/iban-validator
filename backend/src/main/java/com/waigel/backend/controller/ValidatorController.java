@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/iban")
+@RequestMapping("/iban")
 @Tag(name = "Validator", description = "Validate your IBAN")
 public class ValidatorController {
     private final Logger logger = LoggerFactory.getLogger(ValidatorController.class);
