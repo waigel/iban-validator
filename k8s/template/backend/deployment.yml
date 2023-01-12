@@ -13,7 +13,7 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 2
       maxUnavailable: 1
   template:
     metadata:
@@ -27,6 +27,8 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: live
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: /api
           volumeMounts:
           ports:
             - containerPort: 8080
@@ -35,7 +37,7 @@ spec:
           readinessProbe:
             timeoutSeconds: 5
             httpGet:
-              path: /actuator/health
+              path: /api/actuator/health
               port: http
           lifecycle:
             preStop:
