@@ -24,10 +24,7 @@ const tolgee = Tolgee()
 
 root.render(
   <React.StrictMode>
-    <TolgeeProvider
-      tolgee={tolgee}
-      fallback="Loading..." // loading fallback
-    >
+    <TolgeeProvider tolgee={tolgee}>
       <App />
     </TolgeeProvider>
   </React.StrictMode>
