@@ -1,12 +1,14 @@
 package com.waigel.backend.blz.data;
 
 import com.waigel.backend.blz.BLZGenericDataSource;
+import com.waigel.backend.iban.IBANRegistryLoader;
 import com.waigel.backend.models.BLZRecord;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class GermanBLZDataSource extends BLZGenericDataSource {
 
@@ -19,8 +21,8 @@ public class GermanBLZDataSource extends BLZGenericDataSource {
 
     @Override
     public void init() throws IOException {
-        final var path = Paths.get("src", "main", "resources", "blz-de.csv");
-        final String[] lines = Files.readString(path).split(System.lineSeparator());
+        final var inputStream = GermanBLZDataSource.class.getClassLoader().getResourceAsStream("blz-de.csv");
+        final String[] lines = new String(Objects.requireNonNull(inputStream).readAllBytes()).split(System.lineSeparator());
         for (final String line : lines) {
             String[] keyValue = line.split(",");
             //remove quotes

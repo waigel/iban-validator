@@ -14,9 +14,10 @@ public class IBANRegistryLoader {
     public static IbanRegistry registry;
 
     public static void loadRegistryFromFile() throws IOException {
-        final Path path = Paths.get("src", "main", "resources", "IBANRegistry.yml");
+     //   final Path path = Paths.get("src", "main", "resources", "IBANRegistry.yml");
+        final var inputStream = IBANRegistryLoader.class.getClassLoader().getResourceAsStream("IBANRegistry.yml");
         final var mapper = new ObjectMapper(new YAMLFactory());
         mapper.findAndRegisterModules();
-        registry = mapper.readValue(path.toFile(), IbanRegistry.class);
+        registry = mapper.readValue(inputStream, IbanRegistry.class);
     }
 }
