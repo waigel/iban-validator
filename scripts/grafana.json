@@ -322,7 +322,7 @@
             "uid": null
           },
           "editorMode": "code",
-          "expr": "sum(ibanapi_balance_bank)",
+          "expr": "sum(ibanapi_balance_bank) != 0",
           "legendFormat": "Bank",
           "range": true,
           "refId": "A"
@@ -333,7 +333,7 @@
             "uid": null
           },
           "editorMode": "code",
-          "expr": "sum(ibanapi_balance_basic)",
+          "expr": "sum(ibanapi_balance_basic) != 0",
           "hide": false,
           "legendFormat": "Basic",
           "range": true,

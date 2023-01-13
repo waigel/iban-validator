@@ -48,6 +48,11 @@ public class IBANApiFallbackDataSource extends BLZGenericDataSource {
           .register(meterRegistry)
           .increment();
 
+      if (data.getBank() == null ) {
+        logger.info("IBANApiFallbackDataSource: No information found for IBAN: " + iban);
+        return null;
+      }
+
       final var blzRecord =
           new BLZRecord(
               data.getBankAccount(),
