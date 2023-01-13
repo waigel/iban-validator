@@ -149,8 +149,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: imranismail/setup-kustomize@v2
+      - name: Create .env file with api related secrets
+        run: |
+          echo "IBAN_API_KEY=${{ secrets.IBAN_API_KEY }}" > k8s/template/.env
       - name: Build kustomize deployment config
-        run: IBAN_API_KEY=${{ secrets.IBAN_API_KEY }} ./k8s/k8s-apply.sh
+        run: ./k8s/k8s-apply.sh
       - uses: actions-hub/kubectl@v1.26.0
         env:
           KUBE_CONFIG: ${{ secrets.K8S_CONFIG }}

@@ -1,1 +1,2 @@
 k8s/prod.yml
+k8s/template/.env

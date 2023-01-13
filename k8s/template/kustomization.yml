@@ -10,5 +10,4 @@ resources:
 secretGenerator:
   - name: $APP_NAME-api
     namespace: $NAMESPACE
-    literals:
-      - IBAN_API_KEY=$IBAN_API_KEY
+    env: .env
