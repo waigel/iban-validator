@@ -4,12 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
 public abstract class ErrorException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 1264424628442265651L;
     private List<Serializable> params = null;
     private final String code;
 

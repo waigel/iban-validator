@@ -31,10 +31,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ValidationControllerTest {
     @Autowired
-    private MockMvc mockMvc;
+    private transient MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private transient ObjectMapper objectMapper;
 
 
     @BeforeAll

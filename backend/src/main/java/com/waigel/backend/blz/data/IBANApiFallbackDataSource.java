@@ -12,12 +12,12 @@ import java.util.HashMap;
 
 public class IBANApiFallbackDataSource extends BLZGenericDataSource {
 
-    private final Logger logger = LoggerFactory.getLogger(IBANApiFallbackDataSource.class);
-    private final HashMap<String, BLZRecord> cache = new HashMap<>();
+    private static final Logger logger = LoggerFactory.getLogger(IBANApiFallbackDataSource.class);
+    private final transient HashMap<String, BLZRecord> cache = new HashMap<>();
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final transient RestTemplate restTemplate = new RestTemplate();
     private final static String API_URL = "https://api.ibanapi.com/v1/validate/";
-    private final String API_KEY;
+    private final transient String API_KEY;
 
 
     public IBANApiFallbackDataSource(final String apiKey) {

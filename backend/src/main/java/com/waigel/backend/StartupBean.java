@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class StartupBean {
 
     @Value("${IBAN_API_KEY}")
-    private String ibanApiKey;
+    private transient String ibanApiKey;
 
     /**
      * Register the Data sources for the BLZ lookup service.

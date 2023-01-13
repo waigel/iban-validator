@@ -10,31 +10,32 @@ import com.waigel.backend.models.dtos.IBANValidationResponseDTO;
 import com.waigel.backend.models.registry.IbanCountryStructure;
 import com.waigel.backend.utils.LatinEncoding;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Locale;
 
 public class IBAN implements Serializable {
-    // Static fields
+    @Serial
+    private static final long serialVersionUID = 1428156783950350266L;
     public static final int MAX_IBAN_LENGTH = 34;
     public static final int MIN_IBAN_LENGTH = 15;
 
-    private IBANCountry country;
-    private String checkDigits;
-    private String content;
-    private final String ibanInput;
-    private IbanCountryStructure ibanCountryStructure;
-    private String bankCode;
-
-    private final Locale locale;
+    private transient IBANCountry country;
+    private transient String checkDigits;
+    private transient String content;
+    private final transient String ibanInput;
+    private transient IbanCountryStructure ibanCountryStructure;
+    private transient String bankCode;
+    private final transient Locale locale;
 
     public IBAN(final String ibanInput, final Locale locale) throws IBANParseException, CountryCodeInvalidException {
         this.locale = locale;
-        if (ibanInput == null){
+        if (ibanInput == null) {
             throw new IBANParseException(Message.IBAN_IS_NULL);
         }
 
-        this.ibanInput = ibanInput.toUpperCase().trim()
+        this.ibanInput = ibanInput.toUpperCase(Locale.ENGLISH).trim()
                 .replace("-", "")
                 .replace(" ", "");
 
@@ -122,7 +123,7 @@ public class IBAN implements Serializable {
     }
 
     public IBANValidationResponseDTO getValidationResponse() {
-        BLZRecord blzRecord = null;
+        BLZRecord blzRecord;
         if (BLZLookupService.isCountryCodeSupported(this.country.countryCode())) {
             blzRecord = BLZLookupService.getBLZRecord(country.countryCode(), this.bankCode);
         } else {

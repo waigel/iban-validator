@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionHandlers {
 
-    private final Logger logger = LoggerFactory.getLogger(ExceptionHandlers.class);
+    private final static Logger logger = LoggerFactory.getLogger(ExceptionHandlers.class);
 
     @ExceptionHandler(IBANParseException.class)
     public ResponseEntity<ErrorResponseBody>  handleIBANParseException(final IBANParseException ex) {

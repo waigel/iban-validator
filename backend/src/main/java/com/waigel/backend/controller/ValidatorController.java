@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/iban")
 @Tag(name = "Validator", description = "Validate your IBAN")
 public class ValidatorController {
-    private final Logger logger = LoggerFactory.getLogger(ValidatorController.class);
+    private final static Logger logger = LoggerFactory.getLogger(ValidatorController.class);
 
     @PostMapping("/validate")
     @Operation(summary = "Validate your IBAN")

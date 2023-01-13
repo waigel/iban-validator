@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class GermanBLZDataSource extends BLZGenericDataSource {
-    private final Logger logger = LoggerFactory.getLogger(GermanBLZDataSource.class);
+    private static final Logger logger = LoggerFactory.getLogger(GermanBLZDataSource.class);
 
-    private final HashMap<String, BLZRecord> blzMap = new HashMap<>();
+    private final transient HashMap<String, BLZRecord> blzMap = new HashMap<>();
 
     @Override
     public String getCountryCode() {
@@ -21,7 +21,7 @@ public class GermanBLZDataSource extends BLZGenericDataSource {
 
     @Override
     public void init() throws IOException {
-        final var inputStream = GermanBLZDataSource.class.getClassLoader().getResourceAsStream("blz-de.csv");
+        final var inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("blz-de.csv");
         final String[] lines = new String(Objects.requireNonNull(inputStream).readAllBytes()).split(System.lineSeparator());
         for (final String line : lines) {
             String[] keyValue = line.split(",");

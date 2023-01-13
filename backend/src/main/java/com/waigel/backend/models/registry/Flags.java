@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Flags {
     @JsonProperty("sepa_country")
-    private Boolean sepaCountry;
+    private transient Boolean sepaCountry;
     @JsonProperty("in_swift_registry")
-    private Boolean inSwiftRegistry;
+    private transient Boolean inSwiftRegistry;
 
     public Boolean isSepaCountry() {
         return sepaCountry;

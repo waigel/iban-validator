@@ -61,6 +61,15 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
 
+      - name: Run spotlessCheck
+        run: ./gradlew spotlessCheck
+
+      - name: Run pmdMain
+        run: ./gradlew pmdMain
+
+      - name: Run pmdTest
+        run: ./gradlew pmdTest
+
       - name: Build backend
         run: ./gradlew bootJar
 
