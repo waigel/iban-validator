@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: $APP_NAME-prometheus-public
+  namespace: $NAMESPACE
+  labels:
+    app: $APP_NAME-prometheus
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "authorization,content-type"
+    nginx.ingress.kubernetes.io/cors-exposed-headers: "authorization,content-type"
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: $APP_NAME-prometheus-auth
+spec:
+  tls:
+    - hosts:
+        - $PROMETHEUS_DOMAIN
+      secretName: $APP_NAME-prometheus-tls
+  rules:
+    - host: $PROMETHEUS_DOMAIN
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: $APP_NAME-prometheus
+                port:
+                  name: http

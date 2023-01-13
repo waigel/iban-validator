@@ -5,9 +5,26 @@ resources:
   - backend/service.yml
   - frontend/deployment.yml
   - frontend/service.yml
+  - prometheus/deployment.yml
+  - prometheus/service.yml
+  - prometheus/ingress.yml
+  - prometheus/persistentVolumeClaim.yml
   - ingress.yml
 
 secretGenerator:
   - name: $APP_NAME-api
     namespace: $NAMESPACE
     env: .env
+  - name: $APP_NAME-prometheus-auth
+    namespace: $NAMESPACE
+    files:
+      - prometheus/config/auth
+
+configMapGenerator:
+  - name: $APP_NAME-prometheus-config
+    namespace: $NAMESPACE
+    files:
+      - prometheus/config/prometheus.yml
+
+generatorOptions:
+  disableNameSuffixHash: true

@@ -7,6 +7,7 @@ export NAMESPACE="lexoffice"
 
 export IMAGE="waigel.azurecr.io/lexoffice/iban-validator"
 export DOMAIN="iban-validator.waigel.com"
+export PROMETHEUS_DOMAIN="iban-validator.prometheus.waigel.com"
 export VERSION=$(git rev-parse --short HEAD)
 
 kubectl kustomize k8s/template | envsubst > k8s/prod.yml

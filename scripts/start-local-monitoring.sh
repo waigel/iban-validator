@@ -41,7 +41,6 @@ if [ -z "$GRAFANA_DASHBOARD" ]; then
     exit 1
 fi
 
-
 importResponse=$(curl -s -X POST -H 'Content-Type: application/json' -d "{\"dashboard\": $GRAFANA_DASHBOARD,\"overwrite\":true}" http://admin:$GRAFANA_PASSWORD@localhost:3000/api/dashboards/import)
 imported=$(echo $importResponse | jq '.imported')
 
@@ -53,8 +52,6 @@ else
     exit 1
 fi
 
-
 importedUrl=$(echo $importResponse | jq '.importedUrl' | sed 's/"//g')
-
 echo "  > Grafana is running on http://localhost:3000$importedUrl"
 echo "  > Login with username 'admin' and password '$GRAFANA_PASSWORD'"

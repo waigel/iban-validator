@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $APP_NAME-prometheus
+  namespace: $NAMESPACE
+  labels:
+    app: $APP_NAME-prometheus
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: $APP_NAME-prometheus
+  template:
+    metadata:
+      labels:
+        app: $APP_NAME-prometheus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      initContainers:
+        - name: data-permission-fix
+          image: busybox
+          command: ["/bin/chmod", "-R", "777", "/prometheus"]
+          volumeMounts:
+            - name: prometheus
+              mountPath: /prometheus
+      containers:
+        - name: prometheus
+          image: quay.io/prometheus/prometheus:v2.0.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--storage.tsdb.path=/prometheus"
+            - "--config.file=/etc/prometheus/prometheus.yml"
+          command:
+            - /bin/prometheus
+          ports:
+            - containerPort: 9090
+              name: http
+              protocol: TCP
+          readinessProbe:
+            timeoutSeconds: 5
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus
+            - name: prometheus
+              mountPath: /prometheus
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            name: $APP_NAME-prometheus-config
+        - name: prometheus
+          persistentVolumeClaim:
+            claimName: $APP_NAME-prometheus
