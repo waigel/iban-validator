@@ -1,4 +1,4 @@
-# Validation if IBAN
+# Validation of IBANs
 
 ## Structure
 

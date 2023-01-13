@@ -5,6 +5,7 @@ import com.waigel.backend.exceptions.CountryCodeInvalidException;
 import com.waigel.backend.exceptions.IBANParseException;
 import com.waigel.backend.exceptions.IBANRegistryException;
 import com.waigel.backend.exceptions.Message;
+import com.waigel.backend.models.BLZRecord;
 import com.waigel.backend.models.dtos.IBANValidationResponseDTO;
 import com.waigel.backend.models.registry.IbanCountryStructure;
 import com.waigel.backend.utils.LatinEncoding;
@@ -18,22 +19,25 @@ public class IBAN implements Serializable {
     public static final int MAX_IBAN_LENGTH = 34;
     public static final int MIN_IBAN_LENGTH = 15;
 
-    private Country country;
+    private IBANCountry country;
     private String checkDigits;
     private String content;
-    private String ibanInput;
+    private final String ibanInput;
     private IbanCountryStructure ibanCountryStructure;
     private String bankCode;
 
-    private Locale locale = Locale.ENGLISH;
+    private final Locale locale;
 
     public IBAN(final String ibanInput, final Locale locale) throws IBANParseException, CountryCodeInvalidException {
         this.locale = locale;
-        if (ibanInput == null)
+        if (ibanInput == null){
             throw new IBANParseException(Message.IBAN_IS_NULL);
+        }
+
         this.ibanInput = ibanInput.toUpperCase().trim()
                 .replace("-", "")
                 .replace(" ", "");
+
         this.validateLength();
         this.validateNotContainsSpecialChars();
         this.parse();
@@ -77,7 +81,7 @@ public class IBAN implements Serializable {
      * and the check number from the IBAN
      */
     private void parse() throws CountryCodeInvalidException {
-        this.country = new Country(this.ibanInput.substring(0, 2), this.locale);
+        this.country = new IBANCountry(this.ibanInput.substring(0, 2), this.locale);
         this.checkDigits = this.ibanInput.substring(2, 4);
         this.content = LatinEncoding.replace(this.ibanInput.substring(4));
     }
@@ -96,19 +100,19 @@ public class IBAN implements Serializable {
             throw new IBANParseException(Message.CHECK_DIGITS_MISMATCH);
     }
 
-    private void validateAndExtractInformationFromIBANRegistry(){
+    private void validateAndExtractInformationFromIBANRegistry() {
         final var registry = new IBANRegistry();
         final var ibanCountryStructure = registry.getCountryByCode(this.country.countryCode());
-        if (ibanCountryStructure == null){
+        if (ibanCountryStructure == null) {
             throw new IBANParseException(Message.IBAN_COUNTRY_NOT_IN_REGISTRY);
         }
         // Check with correct length for ibanCountry
-        if (ibanCountryStructure.getLength()!= 0){
-            if (this.ibanInput.length() != ibanCountryStructure.getLength()){
+        if (ibanCountryStructure.getLength() != 0) {
+            if (this.ibanInput.length() != ibanCountryStructure.getLength()) {
                 throw new IBANRegistryException(Message.IBAN_REGISTRY_LENGTH_MISMATCH, this.country);
             }
         }
-        if (ibanCountryStructure.getEmbeds() != null && ibanCountryStructure.getEmbeds().getBankCode() != null){
+        if (ibanCountryStructure.getEmbeds() != null && ibanCountryStructure.getEmbeds().getBankCode() != null) {
             final var bankCodeStructure = ibanCountryStructure.getEmbeds().getBankCode();
             final var bankCodePosition = bankCodeStructure.getPosition();
             final var bankCodeLength = bankCodeStructure.getLength();
@@ -118,13 +122,21 @@ public class IBAN implements Serializable {
     }
 
     public IBANValidationResponseDTO getValidationResponse() {
+        BLZRecord blzRecord = null;
+        if (BLZLookupService.isCountryCodeSupported(this.country.countryCode())) {
+            blzRecord = BLZLookupService.getBLZRecord(country.countryCode(), this.bankCode);
+        } else {
+            // Use fallback data source for lookup request
+            blzRecord = BLZLookupService.getBLZRecordByIBAN(this.ibanInput);
+        }
+
         return new IBANValidationResponseDTO(
                 this.country.countryCode(),
                 this.country.getCountryName(),
                 this.ibanCountryStructure.getFlags().isSepaCountry(),
                 this.ibanCountryStructure.getFlags().isInSwiftRegistry(),
                 this.bankCode,
-                BLZLookupService.getBLZRecord(country.countryCode(), this.bankCode)
+                blzRecord
         );
     }
 }

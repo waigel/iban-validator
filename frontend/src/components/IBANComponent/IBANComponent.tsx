@@ -1,22 +1,32 @@
 import {useTranslate} from '@tolgee/react';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {ColorRing} from 'react-loader-spinner';
 import {useValidationRequest} from '../../hooks/useValidationRequest';
 import {classNames} from '../../utils/classNames';
-import {AnimationStatus} from '../AnimationStatus/AnimationStatus';
-import {BooleanToText} from '../BooleanToText/BooleanToText';
 import {Button} from '../Button/Button';
 import {DeveloperDialog} from '../DeveloperDialog/DeveloperDialog';
 import {TextInput} from '../Input/TextInput';
-import {TolgeeParams} from '../../types/TolgeeParams';
-import {BLZRecordInformation} from '../BLZRecordInformation/BLZRecordInformation';
+import {IBANStatusCard} from './IBANStatusCard';
 export interface IBANComponentProps {
   clasName?: string;
 }
 
 export const IBANComponent = ({clasName}: IBANComponentProps) => {
-  const {execute, pending, erroCode, information, clearOnValueChange} =
+  const {execute, erroCode, information, pending, clearOnValueChange} =
     useValidationRequest();
   const {t} = useTranslate();
+
+  const [visiblePending, setVisiblePending] = useState(false);
+  useEffect(() => {
+    if (pending) {
+      const timeout = setTimeout(() => {
+        setVisiblePending(true);
+      }, 100);
+      return () => clearTimeout(timeout);
+    } else {
+      setVisiblePending(false);
+    }
+  }, [pending]);
 
   const [input, setInput] = useState('');
   const valueChange = (changedValue: string) => {
@@ -25,13 +35,6 @@ export const IBANComponent = ({clasName}: IBANComponentProps) => {
   };
 
   const submit = () => execute(input);
-
-  const isError = !pending && erroCode && !information;
-  const isSuccess = !pending && !erroCode && information;
-  const params: TolgeeParams = {};
-  erroCode?.params?.forEach((val, index) => {
-    params[index.toString()] = val;
-  });
 
   return (
     <>
@@ -61,45 +64,26 @@ export const IBANComponent = ({clasName}: IBANComponentProps) => {
           {t('LABEL_VALIDATION_BUTTON')}
         </Button>
       </div>
-      <div
-        className={classNames(
-          'flex gap-4 rounded-xl px-8 py-4 bg-card',
-          erroCode || information ? 'visible' : 'invisible',
-          clasName
-        )}
-      >
-        <div style={{width: 45, height: 45}}>
-          {isError && <AnimationStatus status="failed" />}
-          {isSuccess && <AnimationStatus status="success" />}
+      {visiblePending && (
+        <div className="self-center py-8">
+          <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#d93ea5', '#E15089', '#f37653', '#F69A2C', '#fbbc05']}
+          />
         </div>
-        <div className="my-auto">
-          {erroCode && <div>{t(erroCode.code.toString(), params)}</div>}
-          {information && (
-            <div className="flex gap-0 md:gap-8 flex-col md:flex-row">
-              <div>
-                <p className="text-success">{t('MESSAGE_VALID_NOTICE')}</p>
-                <p className="text-gray-300 flex gap-2">
-                  <b>{t('IBAN_VALID_TITLE_COUNTRY')}</b>
-                  {information.countryName} ({information.countryCode})
-                </p>
-                <p className="text-gray-300 flex gap-2">
-                  <b>{t('IBAN_VALID_TITLE_IN_SWIFT_REGISTRY')}</b>
-                  <BooleanToText value={information.isInSwiftRegistry} />
-                </p>
-                <p className="text-gray-300 flex gap-2">
-                  <b>{t('IBAN_VALID_TITLE_IS_SEPA_COUNTRY')}</b>
-                  <BooleanToText value={information.isSepaCountry} />
-                </p>
-                <p className="text-gray-300 flex gap-2">
-                  <b>{t('IBAN_VALID_TITLE_BANK_CODE')}</b>
-                  {information.bankCode ?? t('NOT_AVAILABLE')}
-                </p>
-              </div>
-              <BLZRecordInformation value={information.blzRecord} />
-            </div>
-          )}
-        </div>
-      </div>
+      )}
+      {!visiblePending && (
+        <IBANStatusCard
+          erroCode={erroCode}
+          information={information}
+          pending={pending}
+          clasName={clasName}
+        />
+      )}
     </>
   );
 };

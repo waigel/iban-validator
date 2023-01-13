@@ -7,8 +7,8 @@ import com.waigel.backend.utils.LatinEncoding;
 import java.util.Arrays;
 import java.util.Locale;
 
-public record Country(String countryCode, Locale locale) {
-    public Country {
+public record IBANCountry(String countryCode, Locale locale) {
+    public IBANCountry {
         final String[] availableCountryCodes = Locale.getISOCountries();
         if (!Arrays.asList(availableCountryCodes).contains(countryCode))
             throw new CountryCodeInvalidException(Message.COUNTRY_CODE_INVALID);

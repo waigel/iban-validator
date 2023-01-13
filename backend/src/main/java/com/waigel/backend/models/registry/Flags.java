@@ -1,7 +1,6 @@
 package com.waigel.backend.models.registry;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 
 public class Flags {
     @JsonProperty("sepa_country")

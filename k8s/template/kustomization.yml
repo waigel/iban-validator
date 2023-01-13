@@ -6,3 +6,8 @@ resources:
   - frontend/deployment.yml
   - frontend/service.yml
   - ingress.yml
+
+secretGenerator:
+  - name: $APP_NAME-api
+    literals:
+      - IBAN_API_KEY=$IBAN_API_KEY

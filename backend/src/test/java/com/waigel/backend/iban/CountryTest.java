@@ -31,7 +31,7 @@ public class CountryTest {
     @Test()
     @DisplayName("Country code 'DE' should be convert correctly")
     public void convertCountryCodeDECorrectly() throws CountryCodeInvalidException {
-        final var cc = new Country("DE", null);
+        final var cc = new IBANCountry("DE", null);
         assertEquals(1314, cc.getAsAlpha2());
     }
 
@@ -39,7 +39,7 @@ public class CountryTest {
     @DisplayName("Test should convert all country codes correctly")
     public void convertAllCountryCodesCorrectly() throws CountryCodeInvalidException {
         for (final var entry : testData.entrySet()) {
-            assertEquals(entry.getValue(), new Country(entry.getKey(), null).getAsAlpha2());
+            assertEquals(entry.getValue(), new IBANCountry(entry.getKey(), null).getAsAlpha2());
         }
     }
 }

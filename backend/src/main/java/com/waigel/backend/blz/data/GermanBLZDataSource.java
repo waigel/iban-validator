@@ -1,16 +1,16 @@
 package com.waigel.backend.blz.data;
 
 import com.waigel.backend.blz.BLZGenericDataSource;
-import com.waigel.backend.iban.IBANRegistryLoader;
 import com.waigel.backend.models.BLZRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class GermanBLZDataSource extends BLZGenericDataSource {
+    private final Logger logger = LoggerFactory.getLogger(GermanBLZDataSource.class);
 
     private final HashMap<String, BLZRecord> blzMap = new HashMap<>();
 
@@ -32,14 +32,13 @@ public class GermanBLZDataSource extends BLZGenericDataSource {
             blzMap.putIfAbsent(keyValue[0], new BLZRecord(keyValue[0],
                     keyValue[2], keyValue[5], keyValue[3], keyValue[4], keyValue[7]));
         }
-
-
+        logger.info("GermanBLZDataSource: Loaded {} BLZ records", blzMap.size());
     }
 
     @Override
     public BLZRecord getBLZRecord(String blz) {
-        return blzMap.get(blz);
+        logger.info("GermanBLZDataSource: Looking up BLZ {}", blz);
+        return blzMap.getOrDefault(blz, null);
     }
-
 
 }

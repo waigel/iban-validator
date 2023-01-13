@@ -20,6 +20,11 @@
     "isValid": true
   },
   {
+    "value": "BG18RZBB91550123456789",
+    "bankName": "Bulgarian National Bank",
+    "isValid": true
+  },
+  {
     "bankName": "NOT SEPA COUNTRY",
     "value": "ST68 0001 0001 0051 8453 1011 2",
     "isValid": true

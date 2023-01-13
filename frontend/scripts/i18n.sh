@@ -14,4 +14,4 @@ echo "Unzip i18n files"
 unzip -o i18n.zip -d src/i18n
 rm i18n.zip
 
-echo "i18n installed. Lets translate ...."
+echo "i18n successfully downloaded and installed"

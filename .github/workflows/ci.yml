@@ -139,7 +139,6 @@ jobs:
           build-args: |
             GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
             GIT_COMMIT=${{ steps.short-sha.outputs.sha }}
-          Dockerfile: backend.Dockerfile
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -152,6 +151,8 @@ jobs:
       - uses: imranismail/setup-kustomize@v2
       - name: Build kustomize deployment config
         run: ./k8s/k8s-apply.sh
+        env:
+          IBAN_API_KEY: ${{ secrets.IBAN_API_KEY }}
       - uses: actions-hub/kubectl@v1.26.0
         env:
           KUBE_CONFIG: ${{ secrets.K8S_CONFIG }}

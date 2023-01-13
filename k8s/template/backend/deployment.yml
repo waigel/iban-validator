@@ -29,6 +29,11 @@ spec:
               value: live
             - name: SERVER_SERVLET_CONTEXT_PATH
               value: /api
+            - name: IBAN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: $APP_NAME-api
+                  key: IBAN_API_KEY
           volumeMounts:
           ports:
             - containerPort: 8080
