@@ -30,7 +30,7 @@ public class ValidationControllerTest {
   @BeforeAll
   public static void init() throws IOException {
     IBANRegistryLoader.loadRegistryFromFile();
-    BLZLookupService.registerDataSource(new TestBLZDataSource("DE"));
+    BLZLookupService.registerDataSource(new TestBLZDataSource("AT"));
   }
 
   @Test
@@ -57,7 +57,7 @@ public class ValidationControllerTest {
   public void testValidationControllerForCorrectIBANWithBLZRecord() throws Exception {
     final var jsonBody =
         objectMapper.writeValueAsString(
-            new ValidationRequestDTO("DE-02-12-03-00-00-00-00 20 2  0  51", Locale.ENGLISH));
+            new ValidationRequestDTO("AT026000000001349870", Locale.ENGLISH));
     this.mockMvc
         .perform(post("/iban/validate").contentType(MediaType.APPLICATION_JSON).content(jsonBody))
         .andExpect(status().isOk())
@@ -65,8 +65,8 @@ public class ValidationControllerTest {
             content()
                 .string(
                     ""
-                        + "{\"countryCode\":\"DE\",\"countryName\":\"Germany\",\"isSepaCountry\":true,"
-                        + "\"isInSwiftRegistry\":true,\"bankCode\":\"12030000\",\"blzRecord\":{\"blz\":\"12030000\","
+                        + "{\"countryCode\":\"AT\",\"countryName\":\"Austria\",\"isSepaCountry\":true,"
+                        + "\"isInSwiftRegistry\":true,\"bankCode\":\"60000\",\"blzRecord\":{\"blz\":\"60000\","
                         + "\"bankName\":\"Test Long Name Bank\",\"shortBankName\":\""
                         + "Test Bank\",\"zipCode\":\"12345\",\"city\":\"Test City\",\"bic\":\"TESTBIC\"}}"));
   }
