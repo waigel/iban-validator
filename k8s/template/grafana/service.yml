@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: $APP_NAME-grafana
+  namespace: $NAMESPACE
+spec:
+  selector:
+    app: $APP_NAME-grafana
+  type: ClusterIP
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: $APP_NAME-grafana
+  namespace: $NAMESPACE
+  labels:
+    app: $APP_NAME-grafana
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "authorization,content-type"
+    nginx.ingress.kubernetes.io/cors-exposed-headers: "authorization,content-type"
+spec:
+  tls:
+    - hosts:
+        - $GRAFANA_DOMAIN
+      secretName: $APP_NAME-grafana-tls
+  rules:
+    - host: $GRAFANA_DOMAIN
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: $APP_NAME-grafana
+                port:
+                  name: http

@@ -45,7 +45,8 @@ public class IBANApiFallbackDataSource extends BLZGenericDataSource {
 
       Counter.builder("iban.validation.blz.fallback.request")
           .tags("status", String.valueOf(response.getResult()))
-          .register(meterRegistry);
+          .register(meterRegistry)
+          .increment();
 
       final var blzRecord =
           new BLZRecord(
@@ -67,7 +68,8 @@ public class IBANApiFallbackDataSource extends BLZGenericDataSource {
           e.getResponseBodyAsString());
       Counter.builder("iban.validation.blz.fallback.request")
           .tags("status", e.getStatusCode().toString())
-          .register(meterRegistry);
+          .register(meterRegistry)
+          .increment();
       return null;
     }
   }
