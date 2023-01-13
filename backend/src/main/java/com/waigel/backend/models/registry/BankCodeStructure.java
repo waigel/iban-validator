@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class BankCodeStructure {
-    private Integer position;
-    private Integer length;
+  private Integer position;
+  private Integer length;
 }

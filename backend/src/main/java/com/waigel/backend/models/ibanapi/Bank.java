@@ -5,19 +5,18 @@ import lombok.Data;
 
 @Data
 public class Bank {
-        @JsonProperty("bank_name")
-        private String bankName;
+  @JsonProperty("bank_name")
+  private String bankName;
 
-        private String phone;
+  private String phone;
 
-        private String address;
+  private String address;
 
-        private String bic;
+  private String bic;
 
-        private String city;
+  private String city;
 
-        private String state;
+  private String state;
 
-        private String zip;
-
+  private String zip;
 }

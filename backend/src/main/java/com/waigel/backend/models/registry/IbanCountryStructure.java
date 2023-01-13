@@ -5,10 +5,12 @@ import lombok.Data;
 
 @Data
 public class IbanCountryStructure {
-    private String name;
-    @JsonProperty("country_code")
-    private String countryCode;
-    private Integer length;
-    private Flags flags;
-    private Embeds embeds;
+  private String name;
+
+  @JsonProperty("country_code")
+  private String countryCode;
+
+  private Integer length;
+  private Flags flags;
+  private Embeds embeds;
 }

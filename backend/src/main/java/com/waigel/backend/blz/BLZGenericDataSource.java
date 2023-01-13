@@ -1,15 +1,13 @@
 package com.waigel.backend.blz;
 
 import com.waigel.backend.models.BLZRecord;
-
 import java.io.IOException;
 
 public abstract class BLZGenericDataSource {
 
-    abstract public BLZRecord getBLZRecord(String blz);
+  public abstract BLZRecord getBLZRecord(String blz);
 
-    abstract public void init() throws IOException;
+  public abstract void init() throws IOException;
 
-    abstract public String getCountryCode();
-
+  public abstract String getCountryCode();
 }

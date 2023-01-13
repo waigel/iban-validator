@@ -1,19 +1,16 @@
 package com.waigel.backend.models.dtos;
 
 import jakarta.annotation.Nullable;
+import java.util.Locale;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Locale;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ValidationRequestDTO {
-    private String iban;
+  private String iban;
 
-    @Nullable
-    private Locale locale;
-
+  @Nullable private Locale locale;
 }
