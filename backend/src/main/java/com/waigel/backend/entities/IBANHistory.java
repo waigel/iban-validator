@@ -20,12 +20,11 @@ public class IBANHistory {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", updatable = false, nullable = false)
   private Long id;
-
   @Column(nullable = false)
   private String iban;
-
   private String blz;
   private String ip;
+  @Column(nullable = false, name = "country_code")
   private String countryCode;
 
   @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
