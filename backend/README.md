@@ -30,3 +30,7 @@ Es wird automatisch eine OpenAPI Dokumentation generiert, die über Swagger UI b
 Erreichbar unter: 
 - Lokal: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 - Remote: [iban-validator.waigel.com/api](https://iban-validator.waigel.com/api/swagger-ui/index.html)
+
+## Tests
+
+Es wurden Tests für Controller LookupService und Validierung implementiert.
