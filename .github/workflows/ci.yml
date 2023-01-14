@@ -161,6 +161,9 @@ jobs:
       - name: Create .env file with api related secrets
         run: |
           echo "IBAN_API_KEY=${{ secrets.IBAN_API_KEY }}" > k8s/template/.env
+      - name: Creat application-live.properties file
+        run: |
+          echo "${{ secrets.SPRING_BOOT_APPLICATION_PROPERTIES }}" > k8s/template/application-live.properties
       - name: Build kustomize deployment config
         run: ./k8s/k8s-apply.sh
       - uses: actions-hub/kubectl@v1.26.0

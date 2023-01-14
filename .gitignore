@@ -1,2 +1,3 @@
 k8s/prod.yml
 k8s/template/.env
+k8s/template/application-live.properties

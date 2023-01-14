@@ -29,7 +29,7 @@ public class IBANHistory {
 
   @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
   @CreatedDate
-  private LocalDateTime createdAt;
+  private LocalDateTime createdAt = LocalDateTime.now();
 
   public IBANHistory(final String iban, final String ip, final String blz) {
     this.iban = iban;

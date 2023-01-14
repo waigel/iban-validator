@@ -19,6 +19,10 @@ secretGenerator:
   - name: $APP_NAME-api
     namespace: $NAMESPACE
     env: .env
+  - name: $APP_NAME-api-properties
+    namespace: $NAMESPACE
+    files:
+      - application-live.properties
   - name: $APP_NAME-prometheus-auth
     namespace: $NAMESPACE
     files:

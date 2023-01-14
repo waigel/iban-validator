@@ -35,6 +35,9 @@ spec:
                   name: $APP_NAME-api
                   key: IBAN_API_KEY
           volumeMounts:
+            - name: $APP_NAME-api-properties
+              mountPath: /app/config
+              readOnly: true
           ports:
             - containerPort: 8080
               name: http
@@ -48,3 +51,8 @@ spec:
             preStop:
               exec:
                 command: ["sleep", "5"]
+      volumes:
+        - name: $APP_NAME-api-properties
+          secret:
+            secretName: $APP_NAME-api-properties
+            defaultMode: 420
