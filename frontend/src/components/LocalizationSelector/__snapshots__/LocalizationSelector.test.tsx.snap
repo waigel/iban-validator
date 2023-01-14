@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the LocalizationSelector can change language 1`] = `
+<select
+  className="bg-transparent ring-0"
+  onChange={[Function]}
+>
+  <option
+    className="bg-black ring-0"
+    value="de-DE"
+  >
+    de-DE
+  </option>
+  <option
+    className="bg-black ring-0"
+    value="en-US"
+  >
+    en-US
+  </option>
+</select>
+`;
+
+exports[`should test the LocalizationSelector component is rendered correctly 1`] = `
+<select
+  className="bg-transparent ring-0"
+  onChange={[Function]}
+>
+  <option
+    className="bg-black ring-0"
+    value="de-DE"
+  >
+    de-DE
+  </option>
+  <option
+    className="bg-black ring-0"
+    value="en-US"
+  >
+    en-US
+  </option>
+</select>
+`;

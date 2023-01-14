@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the Title component is rendered correctly 1`] = `
+<h1
+  className="font-omesbold tracking-normal colorfull size"
+>
+  TEST TITLE
+</h1>
+`;
+
+exports[`should test the Title component is rendered correctly with additional className 1`] = `
+<h1
+  className="test2 font-omesbold tracking-normal colorfull size"
+>
+  TEST TITLE
+</h1>
+`;

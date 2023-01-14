@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the Layout component is rendered correctly 1`] = `
+<div
+  className="w-screen h-screen bg-black text-white"
+>
+  <main>
+    <p>
+      TEST CHILD
+    </p>
+  </main>
+  <div>
+    Footer
+  </div>
+</div>
+`;

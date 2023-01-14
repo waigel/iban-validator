@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the Footer component is rendered correctly 1`] = `
+<footer
+  className="fixed bottom-0 w-full text-sm text-gray-500"
+>
+  <div
+    className="max-w-screen-xl py-4 mx-auto"
+  >
+    <div
+      className="flex flex-col md:flex-row justify-center gap-1 md:gap-4 text-center"
+    >
+      <p>
+        COPYRIGHT_NOTICE
+      </p>
+      <a
+        href="undefined"
+        target="_blank"
+      >
+        FOOTER_LABEL_API_DOCU
+      </a>
+      <div>
+        LocalizationSelector
+      </div>
+    </div>
+  </div>
+</footer>
+`;

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the Button component is rendered correctly 1`] = `
+<button
+  className="bg-white px-4 py-2 rounded-3xl border text-black hover:scale-110 font-omessemibold"
+  type="submit"
+/>
+`;

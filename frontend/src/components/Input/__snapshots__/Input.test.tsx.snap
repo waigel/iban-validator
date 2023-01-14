@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the TextInput component is rendered correctly 1`] = `
+<input
+  className="bg-transparent border rounded-xl px-4 py-2 text-center tracking-widest"
+  onChange={[Function]}
+  onKeyDown={[Function]}
+/>
+`;

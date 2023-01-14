@@ -9,7 +9,6 @@ export const LocalizationSelector = () => {
     {label: t('de-DE'), value: 'de-DE'},
     {label: t('en-US'), value: 'en-US'},
   ];
-
   return (
     <>
       <select

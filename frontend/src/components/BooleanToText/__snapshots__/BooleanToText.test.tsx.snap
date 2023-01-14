@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the BooleanToText component is rendered correctly for false 1`] = `
+<span
+  className="text-red-500"
+>
+  NO
+</span>
+`;
+
+exports[`should test the BooleanToText component is rendered correctly for true 1`] = `
+<span
+  className="text-success"
+>
+  YES
+</span>
+`;

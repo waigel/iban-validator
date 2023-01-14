@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should display long bankName if shortBankName is not set 1`] = `
+<div
+  className="flex flex-col md:pt-6"
+>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_NAME
+    </b>
+    Deutsche Bank AG
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BIC
+    </b>
+    GENODEF1M04
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_ADDRESS
+    </b>
+    60311
+     
+    Frankfurt am Main
+  </p>
+</div>
+`;
+
+exports[`should not display address if it is not set 1`] = `
+<div
+  className="flex flex-col md:pt-6"
+>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_NAME
+    </b>
+    Deutsche Bank
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BIC
+    </b>
+    GENODEF1M04
+  </p>
+</div>
+`;
+
+exports[`should not display bankName if it is not set 1`] = `
+<div
+  className="flex flex-col md:pt-6"
+>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BIC
+    </b>
+    GENODEF1M04
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_ADDRESS
+    </b>
+    60311
+     
+    Frankfurt am Main
+  </p>
+</div>
+`;
+
+exports[`should not display bic if it is not set 1`] = `
+<div
+  className="flex flex-col md:pt-6"
+>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_NAME
+    </b>
+    Deutsche Bank
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_ADDRESS
+    </b>
+    60311
+     
+    Frankfurt am Main
+  </p>
+</div>
+`;
+
+exports[`should test the BLZRecordInformation component is rendered correctly 1`] = `
+<div
+  className="flex flex-col md:pt-6"
+>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_NAME
+    </b>
+    Deutsche Bank
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BIC
+    </b>
+    GENODEF1M04
+  </p>
+  <p
+    className="text-gray-300 flex gap-2"
+  >
+    <b>
+      BLZ_INFORMATION_LABEL_BANK_ADDRESS
+    </b>
+    60311
+     
+    Frankfurt am Main
+  </p>
+</div>
+`;

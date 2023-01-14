@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should test the AnimationStatus component rendering 1`] = `
+<div
+  id="lottie_error_status"
+/>
+`;
+
+exports[`should test the AnimationStatus component rendering 2`] = `
+<div
+  id="lottie_success_status"
+/>
+`;
