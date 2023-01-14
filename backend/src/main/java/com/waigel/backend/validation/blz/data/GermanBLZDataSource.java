@@ -1,7 +1,7 @@
-package com.waigel.backend.blz.data;
+package com.waigel.backend.validation.blz.data;
 
-import com.waigel.backend.blz.BLZGenericDataSource;
 import com.waigel.backend.models.BLZRecord;
+import com.waigel.backend.validation.blz.BLZGenericDataSource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;

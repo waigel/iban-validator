@@ -1,6 +1,6 @@
 package com.waigel.backend.exceptions;
 
-import com.waigel.backend.iban.IBAN;
+import com.waigel.backend.validation.iban.IBAN;
 import java.util.Locale;
 
 public enum Message {

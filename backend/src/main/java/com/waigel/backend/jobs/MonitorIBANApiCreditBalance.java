@@ -1,4 +1,4 @@
-package com.waigel.backend.schedule;
+package com.waigel.backend.jobs;
 
 import com.waigel.backend.models.ibanapi.IBANApiBalanceResponse;
 import io.micrometer.core.instrument.MeterRegistry;

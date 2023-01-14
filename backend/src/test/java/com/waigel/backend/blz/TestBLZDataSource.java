@@ -1,6 +1,7 @@
 package com.waigel.backend.blz;
 
 import com.waigel.backend.models.BLZRecord;
+import com.waigel.backend.validation.blz.BLZGenericDataSource;
 import java.io.IOException;
 
 public class TestBLZDataSource extends BLZGenericDataSource {

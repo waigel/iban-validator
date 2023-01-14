@@ -3,6 +3,7 @@ package com.waigel.backend.iban;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.waigel.backend.exceptions.CountryCodeInvalidException;
+import com.waigel.backend.validation.iban.IBANCountry;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,6 +1,5 @@
-package com.waigel.backend.iban;
+package com.waigel.backend.validation.iban;
 
-import com.waigel.backend.blz.BLZLookupService;
 import com.waigel.backend.exceptions.CountryCodeInvalidException;
 import com.waigel.backend.exceptions.IBANParseException;
 import com.waigel.backend.exceptions.IBANRegistryException;
@@ -9,6 +8,7 @@ import com.waigel.backend.models.BLZRecord;
 import com.waigel.backend.models.dtos.IBANValidationResponseDTO;
 import com.waigel.backend.models.registry.IbanCountryStructure;
 import com.waigel.backend.utils.LatinEncoding;
+import com.waigel.backend.validation.blz.BLZLookupService;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -44,6 +44,13 @@ public class IBAN implements Serializable {
     this.validateAndExtractInformationFromIBANRegistry();
   }
 
+  public String toString() {
+    return this.ibanInput;
+  }
+
+  public String getBLZ() {
+    return this.bankCode;
+  }
   /**
    * Check the length of the IBAN
    *

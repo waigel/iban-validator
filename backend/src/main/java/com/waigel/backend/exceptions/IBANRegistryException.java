@@ -1,6 +1,6 @@
 package com.waigel.backend.exceptions;
 
-import com.waigel.backend.iban.IBANCountry;
+import com.waigel.backend.validation.iban.IBANCountry;
 import java.io.Serial;
 import java.util.List;
 import org.springframework.http.HttpStatus;

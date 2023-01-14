@@ -1,4 +1,4 @@
-package com.waigel.backend.blz;
+package com.waigel.backend.validation.blz;
 
 import com.waigel.backend.models.BLZRecord;
 import java.io.IOException;

@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.waigel.backend.exceptions.CountryCodeInvalidException;
 import com.waigel.backend.exceptions.IBANParseException;
 import com.waigel.backend.exceptions.Message;
+import com.waigel.backend.validation.iban.IBAN;
+import com.waigel.backend.validation.iban.IBANRegistryLoader;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

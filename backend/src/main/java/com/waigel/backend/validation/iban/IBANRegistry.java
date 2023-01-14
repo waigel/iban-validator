@@ -1,4 +1,4 @@
-package com.waigel.backend.iban;
+package com.waigel.backend.validation.iban;
 
 import com.waigel.backend.models.registry.IbanCountryStructure;
 import com.waigel.backend.models.registry.IbanRegistry;

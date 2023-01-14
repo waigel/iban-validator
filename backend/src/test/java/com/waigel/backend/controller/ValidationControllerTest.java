@@ -1,17 +1,24 @@
 package com.waigel.backend.controller;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.waigel.backend.blz.BLZLookupService;
 import com.waigel.backend.blz.TestBLZDataSource;
-import com.waigel.backend.iban.IBANRegistryLoader;
+import com.waigel.backend.entities.IBANHistory;
 import com.waigel.backend.models.dtos.ValidationRequestDTO;
+import com.waigel.backend.testutils.AbstractControllerTest;
+import com.waigel.backend.validation.blz.BLZLookupService;
+import com.waigel.backend.validation.iban.IBAN;
+import com.waigel.backend.validation.iban.IBANRegistryLoader;
 import java.io.IOException;
 import java.util.Locale;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ValidationControllerTest {
+public class ValidationControllerTest extends AbstractControllerTest {
   @Autowired private transient MockMvc mockMvc;
 
   @Autowired private transient ObjectMapper objectMapper;
@@ -31,6 +38,12 @@ public class ValidationControllerTest {
   public static void init() throws IOException {
     IBANRegistryLoader.loadRegistryFromFile();
     BLZLookupService.registerDataSource(new TestBLZDataSource("AT"));
+  }
+
+  @BeforeEach
+  public void setup() {
+    when(ibanHistoryService.add(any(IBAN.class), anyString()))
+        .thenReturn(new IBANHistory("AT611904300234573201", "10.0.0.1", "4324324324"));
   }
 
   @Test

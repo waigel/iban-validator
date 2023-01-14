@@ -1,7 +1,9 @@
 package com.waigel.backend;
 
-import com.waigel.backend.blz.BLZLookupService;
-import com.waigel.backend.iban.IBANRegistryLoader;
+import com.waigel.backend.validation.blz.BLZLookupService;
+import com.waigel.backend.validation.blz.data.GermanBLZDataSource;
+import com.waigel.backend.validation.blz.data.IBANApiFallbackDataSource;
+import com.waigel.backend.validation.iban.IBANRegistryLoader;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -30,9 +32,8 @@ public class StartupBean {
    */
   @Bean
   public void registerDataSources() throws IOException {
-    BLZLookupService.registerDataSource(new com.waigel.backend.blz.data.GermanBLZDataSource());
-    BLZLookupService.registerDataSource(
-        new com.waigel.backend.blz.data.IBANApiFallbackDataSource(ibanApiKey, meterRegistry));
+    BLZLookupService.registerDataSource(new GermanBLZDataSource());
+    BLZLookupService.registerDataSource(new IBANApiFallbackDataSource(ibanApiKey, meterRegistry));
   }
 
   /**

@@ -1,8 +1,8 @@
-package com.waigel.backend.blz.data;
+package com.waigel.backend.validation.blz.data;
 
-import com.waigel.backend.blz.BLZGenericDataSource;
 import com.waigel.backend.models.BLZRecord;
 import com.waigel.backend.models.ibanapi.IBANApiValidationResponse;
+import com.waigel.backend.validation.blz.BLZGenericDataSource;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.io.IOException;

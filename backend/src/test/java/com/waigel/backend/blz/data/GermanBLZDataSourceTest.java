@@ -2,6 +2,7 @@ package com.waigel.backend.blz.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.waigel.backend.validation.blz.data.GermanBLZDataSource;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

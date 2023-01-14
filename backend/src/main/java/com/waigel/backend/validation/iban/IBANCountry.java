@@ -1,4 +1,4 @@
-package com.waigel.backend.iban;
+package com.waigel.backend.validation.iban;
 
 import com.waigel.backend.exceptions.CountryCodeInvalidException;
 import com.waigel.backend.exceptions.Message;

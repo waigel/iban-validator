@@ -1,4 +1,4 @@
-package com.waigel.backend.iban;
+package com.waigel.backend.validation.iban;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
