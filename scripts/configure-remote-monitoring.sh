@@ -2,6 +2,7 @@
 GRAFANA_PASSWORD="grafanaloginpw"
 GRAFANA_REMOTE_HOST="iban-validator.grafana.waigel.com"
 PROMETHEUS_CLUSTER_HOST="iban-validator-prometheus.lexoffice.svc.cluster.local"
+MYSQL_DATA_SOURCE_UID="q_R_ywhVk"
 
 # 1. Create datasource
 dataSourceResponse=$(curl -s -X POST -H "Content-Type: application/json" -d '{"name":"Prometheus","type":"prometheus","url":"http://'$PROMETHEUS_CLUSTER_HOST':9090","access":"proxy","isDefault":true,"overwrite": true}' https://admin:$GRAFANA_PASSWORD@$GRAFANA_REMOTE_HOST/api/datasources)
@@ -12,7 +13,6 @@ else
     echo $dataSourceResponse
 fi
 
-
 # 2. Import dashboard
 GRAFANA_DASHBOARD=$(cat scripts/grafana.json)
 if [ -z "$GRAFANA_DASHBOARD" ]; then
@@ -20,6 +20,7 @@ if [ -z "$GRAFANA_DASHBOARD" ]; then
     exit 1
 fi
 
+GRAFANA_DASHBOARD=$(echo $GRAFANA_DASHBOARD | sed 's/__MYSQL__/'$MYSQL_DATA_SOURCE_UID'/g')
 importResponse=$(curl -s -X POST -H 'Content-Type: application/json' -d "{\"dashboard\": $GRAFANA_DASHBOARD,\"overwrite\":true}" https://admin:$GRAFANA_PASSWORD@$GRAFANA_REMOTE_HOST/api/dashboards/import)
 imported=$(echo $importResponse | jq '.imported')
 

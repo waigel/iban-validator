@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,8 +43,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": null
+        "type": "prometheus"
       },
       "description": "The count of API requests per second",
       "fieldConfig": {
@@ -53,8 +52,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -119,8 +116,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(irate(iban_validation_requests_total[1m]))",
@@ -135,8 +131,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": null
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -144,8 +139,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -212,8 +205,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "increase(http_server_requests_seconds_count{uri!=\"/actuator/prometheus\"}[1m])",
@@ -233,6 +225,295 @@
         "x": 0,
         "y": 11
       },
+      "id": 16,
+      "panels": [],
+      "title": "IBAN History",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "__MYSQL__"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 15,
+        "x": 0,
+        "y": 12
+      },
+      "id": 18,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "tooltip": false,
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.4,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "sum",
+                  "fixed": 5,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "location": {
+              "gazetteer": "public/gazetteer/countries.json",
+              "lookup": "country",
+              "mode": "lookup"
+            },
+            "name": "IBAN Country",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "view": {
+          "id": "coords",
+          "lat": 48.175893,
+          "lon": 37.318693,
+          "zoom": 3.43
+        }
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "__MYSQL__"
+          },
+          "format": "table",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT count(country_code) as \"sum\", country_code as \"country\" FROM ibanhistory WHERE $__timeFilter(created_at) GROUP BY country_code",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "country_code"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "country_code"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "avg"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "ibanhistory",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "IBAN country",
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "__MYSQL__"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 9,
+        "x": 15,
+        "y": 12
+      },
+      "id": 21,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "country"
+          }
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "__MYSQL__"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT country_code as \"country\", blz as \"BLZ\", count(blz) as \"count\"  FROM ibanhistory WHERE $__timeFilter(created_at) GROUP BY blz, country_code ORDER BY count(blz)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "ibanhistory",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Top bank list",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
       "id": 8,
       "panels": [],
       "title": "External: IBAN Api (api.ibanapi.com)",
@@ -240,8 +521,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": null
+        "type": "prometheus"
       },
       "description": "A \"bank\" balance is required for a BLZ query for IBANs outside Germany.",
       "fieldConfig": {
@@ -250,8 +530,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -300,7 +578,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 23
       },
       "id": 10,
       "options": {
@@ -318,8 +596,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ibanapi_balance_bank) != 0",
@@ -329,8 +606,7 @@
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "sum(ibanapi_balance_basic) != 0",
@@ -344,10 +620,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": null
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -367,11 +639,11 @@
               },
               {
                 "color": "orange",
-                "value": 20
+                "value": 50
               },
               {
                 "color": "green",
-                "value": 60
+                "value": 500
               }
             ]
           }
@@ -382,7 +654,7 @@
         "h": 8,
         "w": 4,
         "x": 12,
-        "y": 12
+        "y": 23
       },
       "id": 13,
       "options": {
@@ -399,27 +671,29 @@
         },
         "textMode": "value_and_name"
       },
-      "pluginVersion": "9.3.2",
+      "pluginVersion": "8.4.1",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "sum(ibanapi_balance_bank)",
+          "interval": "",
           "legendFormat": "Bank",
           "range": true,
           "refId": "A"
         },
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "sum(ibanapi_balance_basic)",
           "hide": false,
+          "interval": "",
           "legendFormat": "Basic",
           "range": true,
           "refId": "B"
@@ -430,8 +704,7 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": null
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -439,8 +712,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -491,7 +762,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "401 UNAUTHORIZED"
+                  "200"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -514,7 +785,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 12
+        "y": 23
       },
       "id": 14,
       "options": {
@@ -532,8 +803,7 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": null
+            "type": "prometheus"
           },
           "editorMode": "code",
           "expr": "increase(iban_validation_blz_fallback_request_total[1m])",
@@ -546,21 +816,21 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 37,
+  "refresh": "5s",
+  "schemaVersion": 35,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "IBAN Validation API",
-  "uid": "iXDerUhVk",
-  "version": 12,
+  "uid": null,
+  "version": 14,
   "weekStart": ""
 }

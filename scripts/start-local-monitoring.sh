@@ -1,5 +1,6 @@
 #bin/bash
 GRAFANA_PASSWORD="grafanaloginpw"
+MYSQL_DATA_SOURCE_UID="q_R_ywhVk"
 
 # Check if port 9090 or 3000 is already in use
 if lsof -Pi :9090 -sTCP:LISTEN -t >/dev/null ; then
@@ -41,6 +42,7 @@ if [ -z "$GRAFANA_DASHBOARD" ]; then
     exit 1
 fi
 
+GRAFANA_DASHBOARD=$(echo $GRAFANA_DASHBOARD | sed 's/__MYSQL__/'$MYSQL_DATA_SOURCE_UID'/g')
 importResponse=$(curl -s -X POST -H 'Content-Type: application/json' -d "{\"dashboard\": $GRAFANA_DASHBOARD,\"overwrite\":true}" http://admin:$GRAFANA_PASSWORD@localhost:3000/api/dashboards/import)
 imported=$(echo $importResponse | jq '.imported')
 
