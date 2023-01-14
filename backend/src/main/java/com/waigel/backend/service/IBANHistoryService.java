@@ -29,6 +29,7 @@ public class IBANHistoryService {
   public IBANHistory add(@NotNull final IBAN iban, final HttpServletRequest request) {
     logger.info("IBANHistoryService: Registering IBAN in history: {}", iban.toString());
     return ibanHistoryRepository.save(
-        new IBANHistory(iban.toString(), this.getRequestIp(request), iban.getBLZ()));
+        new IBANHistory(
+            iban.toString(), this.getRequestIp(request), iban.getBLZ(), iban.getCountryCode()));
   }
 }

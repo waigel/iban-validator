@@ -43,7 +43,7 @@ public class ValidationControllerTest extends AbstractControllerTest {
   @BeforeEach
   public void setup() {
     when(ibanHistoryService.add(any(IBAN.class), any(HttpServletRequest.class)))
-        .thenReturn(new IBANHistory("AT611904300234573201", "10.0.0.1", "4324324324"));
+        .thenReturn(new IBANHistory("AT611904300234573201", "10.0.0.1", "4324324324", "DE"));
   }
 
   @Test

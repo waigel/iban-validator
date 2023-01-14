@@ -51,6 +51,7 @@ public class IBAN implements Serializable {
   public String getBLZ() {
     return this.bankCode;
   }
+
   /**
    * Check the length of the IBAN
    *
@@ -138,5 +139,9 @@ public class IBAN implements Serializable {
         this.ibanCountryStructure.getFlags().isInSwiftRegistry(),
         this.bankCode,
         blzRecord);
+  }
+
+  public String getCountryCode() {
+    return this.country.countryCode();
   }
 }

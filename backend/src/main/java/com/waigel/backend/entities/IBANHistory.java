@@ -26,14 +26,17 @@ public class IBANHistory {
 
   private String blz;
   private String ip;
+  private String countryCode;
 
   @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP")
   @CreatedDate
   private LocalDateTime createdAt = LocalDateTime.now();
 
-  public IBANHistory(final String iban, final String ip, final String blz) {
+  public IBANHistory(
+      final String iban, final String ip, final String blz, final String countryCode) {
     this.iban = iban;
     this.ip = ip;
     this.blz = blz;
+    this.countryCode = countryCode;
   }
 }
