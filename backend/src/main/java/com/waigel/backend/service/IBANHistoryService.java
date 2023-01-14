@@ -3,6 +3,7 @@ package com.waigel.backend.service;
 import com.waigel.backend.entities.IBANHistory;
 import com.waigel.backend.repositories.IBANHistoryRepository;
 import com.waigel.backend.validation.iban.IBAN;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +18,17 @@ public class IBANHistoryService {
     this.ibanHistoryRepository = ibanHistoryRepository;
   }
 
-  public IBANHistory add(@NotNull final IBAN iban, final String ip) {
+  private String getRequestIp(final HttpServletRequest request) {
+    var ip = request.getHeader("X-FORWARDED-FOR");
+    if (ip == null) {
+      ip = request.getRemoteAddr();
+    }
+    return ip;
+  }
+
+  public IBANHistory add(@NotNull final IBAN iban, final HttpServletRequest request) {
     logger.info("IBANHistoryService: Registering IBAN in history: {}", iban.toString());
-    return ibanHistoryRepository.save(new IBANHistory(iban.toString(), ip, iban.getBLZ()));
+    return ibanHistoryRepository.save(
+        new IBANHistory(iban.toString(), this.getRequestIp(request), iban.getBLZ()));
   }
 }

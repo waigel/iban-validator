@@ -47,7 +47,7 @@ public class ValidatorController {
     logger.info("Handling validation request for IBAN: {}", validationRequestDTO.getIban());
     requestCounter.increment(); // Increment the request counter for prometheus
     final var iban = new IBAN(validationRequestDTO.getIban(), validationRequestDTO.getLocale());
-    ibanHistoryService.add(iban, request.getRemoteAddr());
+    ibanHistoryService.add(iban, request);
     return ResponseEntity.ok(iban.getValidationResponse());
   }
 }

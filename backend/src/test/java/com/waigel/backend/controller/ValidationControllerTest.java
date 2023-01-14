@@ -1,7 +1,6 @@
 package com.waigel.backend.controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -15,6 +14,7 @@ import com.waigel.backend.testutils.AbstractControllerTest;
 import com.waigel.backend.validation.blz.BLZLookupService;
 import com.waigel.backend.validation.iban.IBAN;
 import com.waigel.backend.validation.iban.IBANRegistryLoader;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Locale;
 import org.junit.jupiter.api.BeforeAll;
@@ -42,7 +42,7 @@ public class ValidationControllerTest extends AbstractControllerTest {
 
   @BeforeEach
   public void setup() {
-    when(ibanHistoryService.add(any(IBAN.class), anyString()))
+    when(ibanHistoryService.add(any(IBAN.class), any(HttpServletRequest.class)))
         .thenReturn(new IBANHistory("AT611904300234573201", "10.0.0.1", "4324324324"));
   }
 
