@@ -208,7 +208,7 @@
             "type": "prometheus"
           },
           "editorMode": "code",
-          "expr": "increase(http_server_requests_seconds_count{uri!=\"/actuator/prometheus\"}[1m])",
+          "expr": "sum by(status, method) (increase(http_server_requests_seconds_count{uri!=\"/actuator/prometheus\"}[1m]))",
           "legendFormat": "{{status}} -  {{method}}",
           "range": true,
           "refId": "A"
