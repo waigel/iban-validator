@@ -14,7 +14,7 @@ exports[`should test the Footer component is rendered correctly 1`] = `
         COPYRIGHT_NOTICE
       </p>
       <a
-        href="undefined"
+        href="http://localhost:8080"
         target="_blank"
       >
         FOOTER_LABEL_API_DOCU

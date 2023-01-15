@@ -16,7 +16,9 @@ export const useValidationRequest = () => {
 
     const response = await axios
       .post<IBANResponse | ErrorResponse>(
-        `${process.env.REACT_APP_API_ENDPOINT}/iban/validate`,
+        `${
+          process.env.REACT_APP_API_ENDPOINT ?? 'http://localhost:8080'
+        }/iban/validate`,
         {iban, locale: tolgee.getLanguage()}
       )
       .then(response => {
@@ -45,7 +47,7 @@ export const useValidationRequest = () => {
     return response;
   };
 
-  const clearOnValueChange = () => {
+  const clearHandleValueChange = () => {
     setErroCode(null);
     setInformation(null);
   };
@@ -55,6 +57,6 @@ export const useValidationRequest = () => {
     pending,
     erroCode,
     information,
-    clearOnValueChange,
+    clearHandleValueChange,
   };
 };

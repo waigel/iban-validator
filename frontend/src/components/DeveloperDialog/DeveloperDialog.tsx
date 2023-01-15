@@ -37,7 +37,7 @@ export const DeveloperDialog = ({onTestIBANSelected}: DeveloperDialogProps) => {
             {testData.map((testIBAN, index) => {
               return (
                 <li
-                  id={`${index}`}
+                  key={index}
                   className={classNames(
                     'cursor-pointer py-1 truncate ',
                     testIBAN.isValid ? 'text-green-500' : 'text-red-500'

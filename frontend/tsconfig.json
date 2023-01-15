@@ -2,10 +2,15 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "outDir": "build",
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "resolveJsonModule": true,
+    "noImplicitReturns": false,
   },
   "include": [
     "src/**/*.ts",

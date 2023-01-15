@@ -9,7 +9,7 @@ it('should test the TextInput component is rendered correctly', () => {
 
 it('should test the TextInput onChange event is called correctly', () => {
   const onChange = jest.fn();
-  const tree = TestRenderer.create(<TextInput onValueChange={onChange} />);
+  const tree = TestRenderer.create(<TextInput handleValueChange={onChange} />);
   act(() => {
     const input = tree.root.findByType('input');
     input.props.onChange({target: {value: 'test'}});
@@ -17,24 +17,28 @@ it('should test the TextInput onChange event is called correctly', () => {
   expect(onChange).toBeCalledWith('test');
 });
 
-it('should test the TextInput onEnterPress event is called correctly', () => {
-  const onEnterPress = jest.fn();
-  const tree = TestRenderer.create(<TextInput onEnterPress={onEnterPress} />);
+it('should test the TextInput handleEnterPress event is called correctly', () => {
+  const handleEnterPress = jest.fn();
+  const tree = TestRenderer.create(
+    <TextInput handleEnterPress={handleEnterPress} />
+  );
   act(() => {
     const input = tree.root.findByType('input');
     input.props.onKeyDown({key: 'Enter'});
   });
-  expect(onEnterPress).toBeCalled();
+  expect(handleEnterPress).toBeCalled();
 });
 
-it('should test the TextInput onEnterPress event is not called when key is not Enter', () => {
-  const onEnterPress = jest.fn();
-  const tree = TestRenderer.create(<TextInput onEnterPress={onEnterPress} />);
+it('should test the TextInput handleEnterPress event is not called when key is not Enter', () => {
+  const handleEnterPress = jest.fn();
+  const tree = TestRenderer.create(
+    <TextInput handleEnterPress={handleEnterPress} />
+  );
   act(() => {
     const input = tree.root.findByType('input');
     input.props.onKeyDown({key: 'ALT'});
   });
-  expect(onEnterPress).not.toBeCalled();
+  expect(handleEnterPress).not.toBeCalled();
 });
 
 it('should test the TextInput defaultValue is set correctly', () => {

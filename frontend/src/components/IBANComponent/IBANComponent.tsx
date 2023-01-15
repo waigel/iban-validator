@@ -12,7 +12,7 @@ export interface IBANComponentProps {
 }
 
 export const IBANComponent = ({clasName}: IBANComponentProps) => {
-  const {execute, erroCode, information, pending, clearOnValueChange} =
+  const {execute, erroCode, information, pending, clearHandleValueChange} =
     useValidationRequest();
   const {t} = useTranslate();
 
@@ -31,7 +31,7 @@ export const IBANComponent = ({clasName}: IBANComponentProps) => {
   const [input, setInput] = useState('');
   const valueChange = (changedValue: string) => {
     setInput(changedValue);
-    clearOnValueChange();
+    clearHandleValueChange();
   };
 
   const submit = () => execute(input);
@@ -52,9 +52,9 @@ export const IBANComponent = ({clasName}: IBANComponentProps) => {
       >
         <TextInput
           placeholder={t('LABEL_IBAN_PLACEHOLDER')}
-          onValueChange={valueChange}
+          handleValueChange={valueChange}
           defaultValue={input}
-          onEnterPress={submit}
+          handleEnterPress={submit}
           className="rounded-none border-none focus:border-transparent uppercase w-full"
         />
         <Button

@@ -9,7 +9,12 @@ export const Footer = () => {
       <div className="max-w-screen-xl py-4 mx-auto">
         <div className="flex flex-col md:flex-row justify-center gap-1 md:gap-4 text-center">
           <p>{t('COPYRIGHT_NOTICE')}</p>
-          <a href={`${process.env.REACT_APP_API_ENDPOINT}`} target="_blank">
+          <a
+            href={`${
+              process.env.REACT_APP_API_ENDPOINT ?? 'http://localhost:8080'
+            }`}
+            target="_blank"
+          >
             {t('FOOTER_LABEL_API_DOCU')}
           </a>
           <LocalizationSelector />
