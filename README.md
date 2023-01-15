@@ -21,11 +21,46 @@ Bitte bereite eine kurze Präsentation vor, die wir als fachliche Diskussionsgru
 
 # Umsetzung
 
-**Struktur**: 
+## Struktur 
 Das [Frontend](/frontend#readme), [Backend](/backend#readme), [Deployment für Kubernetes](/k8s#readme) und [GitHub Actions (CI)](/.github/workflows/ci.yml) befinden sich in diesem Monorepo.
 
 Zusätlich gibt es im [scripts](/scripts#readme) Ordner noch Scripte zum lokalen aufsetzen von `Prometheus` und `Grafana`.
 
+## Deployment
+
+Die API und das Frontend werden in Docker Images gebaut und in einer private docker registry (azurecr.io) gespeichert. Über`Kustomize` werden alle benötigten Konfigurationsdateien gebaut und durch `kubectl` ins Cluster deployed. 
+
+Dabei besteht das Deployment aus folgendn Ressourcen:
+
+1. Deployments 
+- iban-validator-grafana
+- iban-validator-prometheus
+- iban-validator-api
+- iban-validator-frontend
+  Hinweis: Das Frontend wird gebaut und die generierten Files durch einen integrierten NGINX webserver im Container ausgeliefert. 
+2. Service
+- iban-validator-grafana
+- iban-validator-prometheus
+- iban-validator-api
+- iban-validator-frontend
+3. Ingress
+- iban-validator-grafana [iban-validator.grafana.waigel.com](https://iban-validator.grafana.waigel.com)
+- iban-validator-prometheus-public [iban-validator.prometheus.waigel.com](https://iban-validator.prometheus.waigel.com) <br/>
+> **Warning**<br/>
+> BASIC Auth required
+- iban-validator
+> **Note**<br/>
+> `/api` -> iban-validator-api <br/>
+> `/` -> iban-validator-frontend
+
+## Monitoring
+Gerade durch die Anbindung der externe API [api.ibanapi.de](api.ibanapi.de) muss unbedingt der Verbrauch und das noch verfügbare Guthaben überwacht werden. Aus diesem Grund wird `prometheus` mit `Grafana` verwendet um den Verbrauch und den Status, in nahezu echtzeit, einzusehen. 
+
+Zusätlich werden die gespeicherten IBANs aus der Datenbank in einer Geomap grafisch dargestellt. 
+
+Hier gehts zu Grafana: [Grafana](https://iban-validator.grafana.waigel.com)<br/>
+Benutzername: `readonly`<br/>
+Passwort: `lexofficeIbanValidator2023`
 
 
 
