@@ -36,8 +36,9 @@ Dabei besteht das Deployment aus folgendn Ressourcen:
 - iban-validator-grafana
 - iban-validator-prometheus
 - iban-validator-api
-- iban-validator-frontend
-  Hinweis: Das Frontend wird gebaut und die generierten Files durch einen integrierten NGINX webserver im Container ausgeliefert. 
+- iban-validator-frontend<br/>
+> **Note**<br/>
+> Es wird ein production build generiert, dieser wird zusammen mit einem NGINX Webserver im Image gespeichert. 
 2. Service
 - iban-validator-grafana
 - iban-validator-prometheus
