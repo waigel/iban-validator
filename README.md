@@ -62,7 +62,10 @@ Hier gehts zu Grafana: [Grafana](https://iban-validator.grafana.waigel.com)<br/>
 Benutzername: `readonly`<br/>
 Passwort: `lexofficeIbanValidator2023`
 
+### CI
 
+GitHub Actions automatisiert das komplette bauen, prüfen, validieren und anschlißende ausrollen im Cluster. 
+![image](https://user-images.githubusercontent.com/25115243/212552370-568e60e9-78ba-4977-bde7-d1d394235c06.png)
 
 
 
