@@ -54,7 +54,7 @@ Dabei besteht das Deployment aus folgendn Ressourcen:
 > `/` -> iban-validator-frontend
 
 ## Monitoring
-Gerade durch die Anbindung der externe API [api.ibanapi.de](api.ibanapi.de) muss unbedingt der Verbrauch und das noch verfügbare Guthaben überwacht werden. Aus diesem Grund wird `prometheus` mit `Grafana` verwendet um den Verbrauch und den Status, in nahezu echtzeit, einzusehen. 
+Gerade durch die Anbindung der externe API [api.ibanapi.de](https://api.ibanapi.de) muss unbedingt der Verbrauch und das noch verfügbare Guthaben überwacht werden. Aus diesem Grund wird `prometheus` mit `Grafana` verwendet um den Verbrauch und den Status, in nahezu echtzeit, einzusehen. 
 
 Zusätlich werden die gespeicherten IBANs aus der Datenbank in einer Geomap grafisch dargestellt. 
 
