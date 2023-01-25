@@ -69,4 +69,5 @@ GitHub Actions automatisiert das komplette bauen, prüfen, validieren und anschl
 ![image](https://user-images.githubusercontent.com/25115243/212552370-568e60e9-78ba-4977-bde7-d1d394235c06.png)
 
 
-
+### Betrieb
+Datenbank liegt bei Hetzner. (sql537.your-server.de)
