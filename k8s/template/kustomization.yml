@@ -33,6 +33,10 @@ configMapGenerator:
     namespace: $NAMESPACE
     files:
       - prometheus/config/prometheus.yml
+  - name: $APP_NAME-grafana-config
+    namespace: $NAMESPACE
+    files:
+      - grafana/config/grafana.ini
 
 generatorOptions:
   disableNameSuffixHash: true
