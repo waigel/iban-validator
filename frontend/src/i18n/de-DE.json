@@ -8,7 +8,7 @@
   "BLZ_INFORMATION_TITLE" : "Weitere Informationen zur Bank:",
   "CHECK_DIGITS_MISMATCH" : "Die Prüfziffer stimmt nicht mit dieser IBAN überein. Prüfen Sie die Eingabe.",
   "CHECK_DIGITS_NOT_NUMERIC" : "Die Prüfziffer ist fehlerhaft. Prüfen Sie die Eingabe.",
-  "COPYRIGHT_NOTICE" : "⚡ Build by Johannes Waigel for Lexoffice",
+  "COPYRIGHT_NOTICE" : "⚡ Build by Johannes Waigel",
   "COUNTRY_CODE_INVALID" : "Die Länderabkürzung ist nicht gültig.",
   "de-DE" : "Deutsch (Deutschland)",
   "en-US" : "English (United States)",

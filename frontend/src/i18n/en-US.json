@@ -8,7 +8,7 @@
   "BLZ_INFORMATION_TITLE" : "More information about the bank:",
   "CHECK_DIGITS_MISMATCH" : "The check digit does not match this IBAN. Check the entry.",
   "CHECK_DIGITS_NOT_NUMERIC" : "The check digit is incorrect. Check the entry.",
-  "COPYRIGHT_NOTICE" : "⚡ Build by Johannes Waigel for Lexoffice",
+  "COPYRIGHT_NOTICE" : "⚡ Build by Johannes Waigel",
   "COUNTRY_CODE_INVALID" : "The country abbreviation is not valid.",
   "de-DE" : "German (Germany)",
   "en-US" : "English (United States)",
