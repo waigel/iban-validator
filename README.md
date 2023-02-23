@@ -1,6 +1,6 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/25115243/212448089-afb26657-7713-4def-9a27-137becaf7185.png" />
-<h1 align="center">IBAN Validierung für Lexoffice</h1>
+<h1 align="center">IBAN Validierung - Bewerbung für Lexoffice</h1>
 </p>
 
 # Aufgabe
@@ -45,13 +45,10 @@ Dabei besteht das Deployment aus folgendn Ressourcen:
 - iban-validator-api
 - iban-validator-frontend
 3. Ingress
-- iban-validator-grafana [iban-validator.grafana.waigel.com](https://iban-validator.grafana.waigel.com)
-- iban-validator-prometheus-public [iban-validator.prometheus.waigel.com](https://iban-validator.prometheus.waigel.com) <br/>
-> **Warning**<br/>
-> BASIC Auth required
 - iban-validator
 > **Note**<br/>
 > `/api` -> iban-validator-api <br/>
+> `/grafana` -> iban-validator-grafana <br/>
 > `/` -> iban-validator-frontend
 
 ## Monitoring
@@ -59,15 +56,7 @@ Gerade durch die Anbindung der externe API [api.ibanapi.de](https://api.ibanapi.
 
 Zusätlich werden die gespeicherten IBANs aus der Datenbank in einer Geomap grafisch dargestellt. 
 
-Hier gehts zu Grafana: [Grafana](https://iban-validator.grafana.waigel.com)<br/>
-Benutzername: `readonly`<br/>
-Passwort: `lexofficeIbanValidator2023`
-
 ### CI
 
 GitHub Actions automatisiert das komplette bauen, prüfen, validieren und anschlißende ausrollen im Cluster. 
 ![image](https://user-images.githubusercontent.com/25115243/212552370-568e60e9-78ba-4977-bde7-d1d394235c06.png)
-
-
-### Betrieb
-Datenbank liegt bei Hetzner. (sql537.your-server.de)

@@ -34,6 +34,15 @@ spec:
                 name: $APP_NAME-api
                 port:
                   name: http
+
+          - path: /grafana
+            pathType: Prefix
+            backend:
+              service:
+                name: $APP_NAME-grafana
+                port:
+                  name: http
+
           - path: /
             pathType: Prefix
             backend:

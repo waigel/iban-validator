@@ -1,4 +1,4 @@
-# Protection (htpasswd) for Prometheus
+# Protection (htpasswd) for Prometheus (disabled for production)
 
 To ensure, that no one can access the Prometheus UI / API a basic auth protection is enabled. The credentials are stored in a secret and mounted into the NGINX INGRESS controller. The NGINX INGRESS controller is configured to use the secret for basic auth protection.
 

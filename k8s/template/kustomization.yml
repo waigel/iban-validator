@@ -7,11 +7,11 @@ resources:
   - frontend/service.yml
   - prometheus/deployment.yml
   - prometheus/service.yml
-  - prometheus/ingress.yml
+  #- prometheus/ingress.yml
   - prometheus/persistentVolumeClaim.yml
   - grafana/deployment.yml
   - grafana/service.yml
-  - grafana/ingress.yml
+  # - grafana/ingress.yml
   - grafana/persistentVolumeClaim.yml
   - ingress.yml
 
